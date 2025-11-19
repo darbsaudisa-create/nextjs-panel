@@ -1061,6 +1061,7 @@ function buildGrandLaunchPopupDOM(widget) {
 
 
 
+
 // ================== ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
 function buildAdvancedSearchButton(widget) {
   var cfg = widget.config || {};
@@ -1074,16 +1075,11 @@ function buildAdvancedSearchButton(widget) {
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
   var maxParts = Number(searchCfg.maxParts || 5);
+var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa")
+  .toString()
+  .replace(/^undefined/, "")
+  .replace(/\/+$/, "");
 
-  // ==== ضبط الدومين بشكل آمن (بدون undefined) ====
-  var rawDomain = searchCfg.targetDomain;
-  if (!rawDomain || typeof rawDomain !== "string") {
-    rawDomain = "https://darb.com.sa";
-  }
-  // لو كان فيه undefined جاية من الداتا يتشال
-  rawDomain = rawDomain.replace(/undefined/gi, "").trim();
-  // إزالة / الزائدة في النهاية
-  var targetDomain = rawDomain.replace(/\/+$/, "");
 
   // النص اللي يجي من config.label
   var buttonLabel = typeof cfg.label === "string" ? cfg.label : "اختيار السيارة";
@@ -1556,7 +1552,6 @@ function buildAdvancedSearchButton(widget) {
     if (e.target === popup) popup.classList.remove("active");
   };
 }
-
 
 
     // ========== تحميل مكتبة Choices (CSS + JS) ==========
@@ -2060,13 +2055,8 @@ function buildAdvancedSearchButton(widget) {
             return;
           }
 
-         var rawBase = searchCfg.targetDomain;
-if (!rawBase || typeof rawBase !== "string") {
-  rawBase = "https://darb.com.sa";
-}
-rawBase = rawBase.replace(/undefined/gi, "").trim();
-var baseDomain = rawBase.replace(/\/+$/, "");
-
+          var baseDomain =
+            searchCfg.targetDomain || "https://darb.com.sa";
 
           var url =
             baseDomain +
