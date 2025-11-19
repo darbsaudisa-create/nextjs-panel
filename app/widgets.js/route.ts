@@ -2060,8 +2060,13 @@ function buildAdvancedSearchButton(widget) {
             return;
           }
 
-          var baseDomain =
-            searchCfg.targetDomain || "https://darb.com.sa";
+         var rawBase = searchCfg.targetDomain;
+if (!rawBase || typeof rawBase !== "string") {
+  rawBase = "https://darb.com.sa";
+}
+rawBase = rawBase.replace(/undefined/gi, "").trim();
+var baseDomain = rawBase.replace(/\/+$/, "");
+
 
           var url =
             baseDomain +
