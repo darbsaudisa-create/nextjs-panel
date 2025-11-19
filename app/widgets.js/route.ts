@@ -583,20 +583,17 @@ export async function GET(_req: NextRequest) {
       document.body.appendChild(overlay);
     }
 
-    // ================== GRAND LAUNCH POPUP (FORM) ==================
-    // ملاحظة: هذا الويجت مخصص لبوب أب "افتتاح المتجر" مع نموذج يجمع بيانات العملاء (اسم / جوال / إيميل)
-    // ويُستخدم عادة قبل افتتاح المتجر أو أثناء الإطلاق لجمع leads للحملة الافتتاحية.
-     // ================== GRAND LAUNCH POPUP (FORM) ==================
+   // ================== GRAND LAUNCH POPUP (FORM) ==================
 // ملاحظة: هذا الويجت مخصص لبوب أب "افتتاح المتجر" مع نموذج يجمع بيانات العملاء (اسم / جوال / إيميل)
 // ويُستخدم عادة قبل افتتاح المتجر أو أثناء الإطلاق لجمع leads للحملة الافتتاحية.
 function buildGrandLaunchPopupDOM(widget) {
   var cfg = widget.config || {};
-  var badgeText = cfg.badgeText || "افتتاح المتجر";
+  var badgeText = cfg.badgeText || "افتتاح ضخم";
   var titleText =
-    cfg.titleText || "قريبًا نفتح أبوابنا لتجربة تسوّق مختلفة";
+    cfg.titleText || "انتظرونا... سيتم افتتاح المتجر قريبًا";
   var subText =
     cfg.subText ||
-    "سجّل بياناتك وخلك من أوّل الناس اللي توصلهم عروض الافتتاح الخاصة.";
+    "نجهّز تجربة تسوّق مختلفة، بأسعار قوية وخدمة أسرع.";
   var buttonText = cfg.buttonText || "نبّهني عند الافتتاح";
   var targetCount = cfg.targetCount || 0;
   var formCfg = cfg.form || {};
@@ -605,7 +602,7 @@ function buildGrandLaunchPopupDOM(widget) {
   var emailField = formCfg.email || { enabled: false, required: false };
   var submitLabel = formCfg.submitLabel || "إرسال البيانات";
 
-  // ===== الخلفية (ستارة داكنة هادئة) =====
+  // ===== الخلفية (ستارة زجاجية هادئة) =====
   var overlay = document.createElement("div");
   overlay.style.position = "fixed";
   overlay.style.inset = "0";
@@ -613,38 +610,41 @@ function buildGrandLaunchPopupDOM(widget) {
   overlay.style.display = "flex";
   overlay.style.alignItems = "center";
   overlay.style.justifyContent = "center";
-  overlay.style.background = "rgba(15,23,42,0.60)";
-  overlay.style.backdropFilter = "blur(10px)";
-  overlay.style.webkitBackdropFilter = "blur(10px)";
+  overlay.style.background = "rgba(15,23,42,0.55)";
+  overlay.style.backdropFilter = "blur(14px)";
+  overlay.style.webkitBackdropFilter = "blur(14px)";
 
+  // توهج خفيف
   var glow = document.createElement("div");
   glow.style.position = "absolute";
   glow.style.inset = "0";
   glow.style.pointerEvents = "none";
   glow.style.background =
-    "radial-gradient(circle at top,rgba(59,130,246,0.18),rgba(59,130,246,0.05),transparent 60%)";
+    "radial-gradient(circle at top,rgba(56,189,248,0.20),rgba(37,99,235,0.08),transparent 65%)";
   overlay.appendChild(glow);
 
-  // ===== الكرت الرئيسي (ستايل بطاقة iOS) =====
+  // ===== الكرت الرئيسي (card ستايل أبل) =====
   var box = document.createElement("div");
-  box.style.width = "min(94vw, 720px)";
-  box.style.background = "rgba(15,23,42,0.88)";
-  box.style.borderRadius = "24px";
+  box.style.width = "min(94vw, 760px)";
+  box.style.background =
+    "linear-gradient(135deg,rgba(15,23,42,0.95),rgba(15,23,42,0.90))";
+  box.style.borderRadius = "26px";
   box.style.position = "relative";
   box.style.color = "#e5e7eb";
-  box.style.padding = "20px 20px 18px";
+  box.style.padding = "18px 18px 16px";
   box.style.boxShadow =
-    "0 26px 80px rgba(15,23,42,0.85), 0 0 0 1px rgba(148,163,184,0.45)";
+    "0 28px 80px rgba(15,23,42,0.95), 0 0 0 1px rgba(148,163,184,0.45)";
   box.style.fontFamily =
     "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
   box.style.overflow = "hidden";
 
   var innerBorder = document.createElement("div");
   innerBorder.style.position = "absolute";
-  innerBorder.style.inset = "1px";
-  innerBorder.style.borderRadius = "22px";
-  innerBorder.style.border = "1px solid rgba(148,163,184,0.35)";
+  innerBorder.style.inset = "0";
+  innerBorder.style.borderRadius = "26px";
+  innerBorder.style.border = "1px solid rgba(148,163,184,0.28)";
   innerBorder.style.pointerEvents = "none";
+  innerBorder.style.mixBlendMode = "screen";
   box.appendChild(innerBorder);
 
   var stripe = document.createElement("div");
@@ -654,23 +654,22 @@ function buildGrandLaunchPopupDOM(widget) {
   stripe.style.width = "70%";
   stripe.style.height = "120px";
   stripe.style.background =
-    "linear-gradient(120deg,transparent,rgba(96,165,250,0.35),transparent)";
-  stripe.style.transform = "translateY(0)";
-  stripe.style.opacity = "0.75";
+    "linear-gradient(120deg,transparent,rgba(59,130,246,0.40),transparent)";
+  stripe.style.opacity = "0.65";
   stripe.style.pointerEvents = "none";
   box.appendChild(stripe);
 
-  // ===== زر الإغلاق (دائري أنيق) =====
+  // ===== زر الإغلاق (دائري بسيط) =====
   var closeBtn = document.createElement("button");
   closeBtn.innerHTML = "×";
   closeBtn.style.position = "absolute";
-  closeBtn.style.top = "12px";
-  closeBtn.style.left = "12px";
+  closeBtn.style.top = "14px";
+  closeBtn.style.left = "14px";
   closeBtn.style.width = "30px";
   closeBtn.style.height = "30px";
   closeBtn.style.borderRadius = "999px";
-  closeBtn.style.border = "1px solid rgba(148,163,184,.5)";
-  closeBtn.style.background = "rgba(15,23,42,0.9)";
+  closeBtn.style.border = "1px solid rgba(148,163,184,.6)";
+  closeBtn.style.background = "rgba(15,23,42,0.95)";
   closeBtn.style.color = "#e5e7eb";
   closeBtn.style.cursor = "pointer";
   closeBtn.style.fontSize = "18px";
@@ -685,7 +684,7 @@ function buildGrandLaunchPopupDOM(widget) {
     closeBtn.style.transform = "scale(1.03)";
   };
   closeBtn.onmouseleave = function () {
-    closeBtn.style.background = "rgba(15,23,42,0.9)";
+    closeBtn.style.background = "rgba(15,23,42,0.95)";
     closeBtn.style.transform = "scale(1.0)";
   };
   closeBtn.onclick = function () {
@@ -694,144 +693,87 @@ function buildGrandLaunchPopupDOM(widget) {
   };
   box.appendChild(closeBtn);
 
-  // ===== محتوى الكرت (شبكة عمودين على الديسكتوب) =====
+  // ===== الشبكة العامة =====
   var contentWrap = document.createElement("div");
   contentWrap.style.position = "relative";
   contentWrap.style.zIndex = "1";
   contentWrap.style.display = "grid";
-  contentWrap.style.gridTemplateColumns = "minmax(0, 1.7fr) minmax(0, 1.3fr)";
-  contentWrap.style.gap = "18px";
-  contentWrap.style.alignItems = "flex-start";
+  contentWrap.style.gridTemplateColumns = "minmax(0,1.2fr) minmax(0,1.6fr)";
+  contentWrap.style.gap = "16px";
+  contentWrap.style.alignItems = "stretch";
 
-  // ===== العمود الأيسر: النصوص والمعلومات =====
+  // ===== العمود الأيسر: الفورم في كرت زجاجي =====
   var leftCol = document.createElement("div");
+  leftCol.style.display = "flex";
+  leftCol.style.alignItems = "stretch";
 
-  var badge = document.createElement("div");
-  badge.textContent = badgeText;
-  badge.style.display = "inline-flex";
-  badge.style.alignItems = "center";
-  badge.style.gap = "6px";
-  badge.style.padding = "5px 14px";
-  badge.style.borderRadius = "999px";
-  badge.style.fontSize = "11px";
-  badge.style.fontWeight = "700";
-  badge.style.background =
-    "linear-gradient(90deg,#e5e7eb,#f9fafb)";
-  badge.style.color = "#111827";
-  badge.style.boxShadow =
-    "0 10px 28px rgba(148,163,184,0.55), 0 0 0 1px rgba(209,213,219,0.9)";
-  badge.style.letterSpacing = "0.06em";
-  badge.style.textTransform = "uppercase";
+  var formCard = document.createElement("div");
+  formCard.style.flex = "1 1 auto";
+  formCard.style.background =
+    "linear-gradient(145deg,rgba(15,23,42,0.95),rgba(15,23,42,0.85))";
+  formCard.style.borderRadius = "22px";
+  formCard.style.boxShadow =
+    "0 22px 60px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
+  formCard.style.padding = "16px 14px 14px";
+  formCard.style.display = "flex";
+  formCard.style.flexDirection = "column";
+  formCard.style.gap = "10px";
+  formCard.style.position = "relative";
+  formCard.style.overflow = "hidden";
 
-  var badgeDot = document.createElement("span");
-  badgeDot.textContent = "●";
-  badgeDot.style.fontSize = "9px";
-  badgeDot.style.color = "#22c55e";
-  badge.appendChild(badgeDot);
+  var formCardGlow = document.createElement("div");
+  formCardGlow.style.position = "absolute";
+  formCardGlow.style.inset = "0";
+  formCardGlow.style.background =
+    "radial-gradient(circle at bottom left,rgba(59,130,246,0.28),transparent 55%)";
+  formCardGlow.style.pointerEvents = "none";
+  formCard.appendChild(formCardGlow);
 
-  leftCol.appendChild(badge);
+  var formHeader = document.createElement("div");
+  formHeader.style.display = "flex";
+  formHeader.style.alignItems = "center";
+  formHeader.style.justifyContent = "space-between";
+  formHeader.style.position = "relative";
+  formHeader.style.zIndex = "1";
 
-  var title = document.createElement("h2");
-  title.textContent = titleText;
-  title.style.marginTop = "12px";
-  title.style.fontSize = "22px";
-  title.style.fontWeight = "800";
-  title.style.letterSpacing = "0.01em";
-  title.style.color = "#f9fafb";
-  title.style.lineHeight = "1.5";
-  leftCol.appendChild(title);
+  var formTitleText = document.createElement("div");
+  formTitleText.textContent = "تنبيهي عند الافتتاح";
+  formTitleText.style.fontSize = "13px";
+  formTitleText.style.fontWeight = "600";
+  formTitleText.style.color = "#f9fafb";
 
-  var sub = document.createElement("p");
-  sub.textContent = subText;
-  sub.style.marginTop = "8px";
-  sub.style.fontSize = "13px";
-  sub.style.color = "#cbd5f5";
-  sub.style.maxWidth = "430px";
-  sub.style.lineHeight = "1.7";
-  leftCol.appendChild(sub);
+  var formDotWrap = document.createElement("div");
+  formDotWrap.style.display = "inline-flex";
+  formDotWrap.style.alignItems = "center";
+  formDotWrap.style.gap = "6px";
 
-  // عدّاد المنتجات / رقم افتراضي ليوحي بالجاهزية
-  var countWrap = document.createElement("div");
-  countWrap.style.marginTop = "16px";
-  countWrap.style.display = "flex";
-  countWrap.style.alignItems = "baseline";
-  countWrap.style.gap = "8px";
+  var formDot = document.createElement("span");
+  formDot.textContent = "●";
+  formDot.style.color = "#22c55e";
+  formDot.style.fontSize = "10px";
 
-  var countSpan = document.createElement("div");
-  countSpan.style.fontSize = "26px";
-  countSpan.style.fontWeight = "800";
-  countSpan.style.fontVariantNumeric = "tabular-nums";
-  countSpan.style.color = "#e5e7eb";
-  countSpan.textContent = "0";
+  var formDotLabel = document.createElement("span");
+  formDotLabel.textContent = "نشط الآن";
+  formDotLabel.style.fontSize = "10px";
+  formDotLabel.style.color = "#d1d5db";
 
-  var countLbl = document.createElement("div");
-  countLbl.textContent = "+ منتج يتم تجهيزها للإطلاق";
-  countLbl.style.fontSize = "12px";
-  countLbl.style.color = "#9ca3af";
+  formDotWrap.appendChild(formDot);
+  formDotWrap.appendChild(formDotLabel);
 
-  countWrap.appendChild(countSpan);
-  countWrap.appendChild(countLbl);
-  leftCol.appendChild(countWrap);
-
-  if (targetCount > 0) {
-    (function animateCounter(el, to, duration) {
-      var start = 0;
-      var startTime = Date.now();
-      function tick() {
-        var now = Date.now();
-        var progress = Math.min(1, (now - startTime) / (duration || 1600));
-        var val = Math.floor(start + (to - start) * progress);
-        el.textContent = val.toLocaleString("ar-SA");
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })(countSpan, targetCount, 1600);
-  }
-
-  var miniNote = document.createElement("div");
-  miniNote.textContent =
-    "بنرسل لك رابط المتجر أول ما يفتح، مع عروض خاصة لعملاء الافتتاح فقط.";
-  miniNote.style.marginTop = "10px";
-  miniNote.style.fontSize = "11px";
-  miniNote.style.color = "#9ca3af";
-  leftCol.appendChild(miniNote);
-
-  // ===== العمود الأيمن: الفورم (ستايل iOS card) =====
-  var rightCol = document.createElement("div");
-  rightCol.style.background = "rgba(15,23,42,0.96)";
-  rightCol.style.borderRadius = "20px";
-  rightCol.style.padding = "14px 14px 12px";
-  rightCol.style.boxShadow =
-    "0 18px 45px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
-  rightCol.style.backdropFilter = "blur(14px)";
-  rightCol.style.webkitBackdropFilter = "blur(14px)";
-
-  var formTitle = document.createElement("div");
-  formTitle.textContent = buttonText;
-  formTitle.style.fontSize = "13px";
-  formTitle.style.fontWeight = "700";
-  formTitle.style.marginBottom = "6px";
-  formTitle.style.display = "flex";
-  formTitle.style.alignItems = "center";
-  formTitle.style.gap = "6px";
-
-  var dot = document.createElement("span");
-  dot.textContent = "●";
-  dot.style.color = "#22c55e";
-  dot.style.fontSize = "10px";
-  formTitle.appendChild(dot);
-
-  rightCol.appendChild(formTitle);
+  formHeader.appendChild(formTitleText);
+  formHeader.appendChild(formDotWrap);
+  formCard.appendChild(formHeader);
 
   var form = document.createElement("form");
-  form.style.marginTop = "4px";
+  form.style.marginTop = "6px";
   form.style.display = "flex";
-  form.style.flexWrap = "wrap";
+  form.style.flexDirection = "column";
   form.style.gap = "8px";
+  form.style.position = "relative";
+  form.style.zIndex = "1";
 
-  function makeInput(labelText, placeholder, type, width) {
+  function makeInput(labelText, placeholder, type) {
     var wrap = document.createElement("div");
-    wrap.style.flex = width || "1 1 160px";
 
     var label = document.createElement("label");
     label.textContent = labelText;
@@ -845,8 +787,8 @@ function buildGrandLaunchPopupDOM(widget) {
     input.placeholder = placeholder || "";
     input.style.width = "100%";
     input.style.borderRadius = "999px";
-    input.style.border = "1px solid rgba(148,163,184,.8)";
-    input.style.background = "rgba(15,23,42,0.95)";
+    input.style.border = "1px solid rgba(148,163,184,.85)";
+    input.style.background = "rgba(15,23,42,0.96)";
     input.style.color = "#f9fafb";
     input.style.fontSize = "12px";
     input.style.padding = "8px 12px";
@@ -860,9 +802,9 @@ function buildGrandLaunchPopupDOM(widget) {
       input.style.background = "rgba(15,23,42,1)";
     };
     input.onblur = function () {
-      input.style.borderColor = "rgba(148,163,184,.8)";
+      input.style.borderColor = "rgba(148,163,184,.85)";
       input.style.boxShadow = "none";
-      input.style.background = "rgba(15,23,42,0.95)";
+      input.style.background = "rgba(15,23,42,0.96)";
     };
 
     wrap.appendChild(label);
@@ -895,20 +837,19 @@ function buildGrandLaunchPopupDOM(widget) {
   var submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = submitLabel;
-  submitBtn.style.flex = "1 1 100%";
+  submitBtn.style.marginTop = "4px";
   submitBtn.style.borderRadius = "999px";
   submitBtn.style.border = "none";
   submitBtn.style.background =
-    "linear-gradient(90deg,#4f46e5,#6366f1,#22c55e)";
+    "linear-gradient(135deg,#38bdf8,#6366f1)";
   submitBtn.style.color = "#f9fafb";
   submitBtn.style.fontSize = "13px";
-  submitBtn.style.fontWeight = "700";
+  submitBtn.style.fontWeight = "600";
   submitBtn.style.padding = "9px 14px";
   submitBtn.style.cursor = "pointer";
-  submitBtn.style.marginTop = "4px";
   submitBtn.style.boxShadow =
-    "0 14px 30px rgba(99,102,241,0.65)";
-  submitBtn.style.display = "inline-flex";
+    "0 18px 38px rgba(99,102,241,0.65)";
+  submitBtn.style.display = "flex";
   submitBtn.style.alignItems = "center";
   submitBtn.style.justifyContent = "center";
   submitBtn.style.gap = "6px";
@@ -916,20 +857,20 @@ function buildGrandLaunchPopupDOM(widget) {
     "transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease";
 
   var arrowSpan = document.createElement("span");
-  arrowSpan.textContent = "↗";
+  arrowSpan.textContent = "➜";
   arrowSpan.style.fontSize = "13px";
   submitBtn.appendChild(arrowSpan);
 
   submitBtn.onmouseenter = function () {
     submitBtn.style.transform = "translateY(-1px)";
     submitBtn.style.boxShadow =
-      "0 18px 36px rgba(79,70,229,0.75)";
+      "0 22px 44px rgba(79,70,229,0.8)";
     submitBtn.style.filter = "brightness(1.03)";
   };
   submitBtn.onmouseleave = function () {
     submitBtn.style.transform = "translateY(0)";
     submitBtn.style.boxShadow =
-      "0 14px 30px rgba(99,102,241,0.65)";
+      "0 18px 38px rgba(99,102,241,0.65)";
     submitBtn.style.filter = "brightness(1)";
   };
 
@@ -939,7 +880,131 @@ function buildGrandLaunchPopupDOM(widget) {
   msg.style.marginTop = "6px";
   msg.style.fontSize = "11px";
   msg.style.minHeight = "16px";
+  msg.style.color = "#9ca3af";
 
+  formCard.appendChild(form);
+  formCard.appendChild(msg);
+
+  leftCol.appendChild(formCard);
+
+  // ===== العمود الأيمن: النصوص الرئيسية =====
+  var rightCol = document.createElement("div");
+  rightCol.style.position = "relative";
+  rightCol.style.display = "flex";
+  rightCol.style.flexDirection = "column";
+  rightCol.style.justifyContent = "center";
+  rightCol.style.gap = "10px";
+
+  var badge = document.createElement("div");
+  badge.style.display = "inline-flex";
+  badge.style.alignItems = "center";
+  badge.style.gap = "6px";
+  badge.style.padding = "5px 14px";
+  badge.style.borderRadius = "999px";
+  badge.style.fontSize = "11px";
+  badge.style.fontWeight = "600";
+  badge.style.background = "rgba(15,23,42,0.85)";
+  badge.style.color = "#e5e7eb";
+  badge.style.boxShadow =
+    "0 12px 30px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
+
+  var badgeDot = document.createElement("span");
+  badgeDot.textContent = "●";
+  badgeDot.style.fontSize = "10px";
+  badgeDot.style.color = "#22c55e";
+
+  var badgeTextNode = document.createElement("span");
+  badgeTextNode.textContent = badgeText;
+
+  badge.appendChild(badgeDot);
+  badge.appendChild(badgeTextNode);
+  rightCol.appendChild(badge);
+
+  var title = document.createElement("h2");
+  title.textContent = titleText;
+  title.style.marginTop = "10px";
+  title.style.fontSize = "22px";
+  title.style.fontWeight = "800";
+  title.style.letterSpacing = "0.01em";
+  title.style.color = "#f9fafb";
+  title.style.lineHeight = "1.7";
+  rightCol.appendChild(title);
+
+  var sub = document.createElement("p");
+  sub.textContent = subText;
+  sub.style.marginTop = "6px";
+  sub.style.fontSize = "13px";
+  sub.style.color = "#cbd5f5";
+  sub.style.maxWidth = "420px";
+  sub.style.lineHeight = "1.8";
+  rightCol.appendChild(sub);
+
+  var countWrap = document.createElement("div");
+  countWrap.style.marginTop = "14px";
+  countWrap.style.display = "flex";
+  countWrap.style.alignItems = "baseline";
+  countWrap.style.gap = "8px";
+
+  var countSpan = document.createElement("div");
+  countSpan.style.fontSize = "26px";
+  countSpan.style.fontWeight = "800";
+  countSpan.style.fontVariantNumeric = "tabular-nums";
+  countSpan.style.color = "#e5e7eb";
+  countSpan.textContent = "0";
+
+  var countLbl = document.createElement("div");
+  countLbl.textContent = "+ منتج يتم تجهيزها للإطلاق";
+  countLbl.style.fontSize = "12px";
+  countLbl.style.color = "#9ca3af";
+
+  countWrap.appendChild(countSpan);
+  countWrap.appendChild(countLbl);
+  rightCol.appendChild(countWrap);
+
+  if (targetCount > 0) {
+    (function animateCounter(el, to, duration) {
+      var start = 0;
+      var startTime = Date.now();
+      function tick() {
+        var now = Date.now();
+        var progress = Math.min(1, (now - startTime) / (duration || 1600));
+        var val = Math.floor(start + (to - start) * progress);
+        el.textContent = val.toLocaleString("ar-SA");
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })(countSpan, targetCount, 1600);
+  }
+
+  var miniNote = document.createElement("div");
+  miniNote.textContent =
+    "بنرسل لك رابط المتجر أول ما يفتح، مع عروض خاصة لعملاء الافتتاح فقط.";
+  miniNote.style.marginTop = "10px";
+  miniNote.style.fontSize = "11px";
+  miniNote.style.color = "#9ca3af";
+  rightCol.appendChild(miniNote);
+
+  // ===== ربط كل شيء مع بعض =====
+  contentWrap.appendChild(leftCol);
+  contentWrap.appendChild(rightCol);
+  box.appendChild(contentWrap);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  // ===== ميديا كويري للجوال =====
+  try {
+    if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
+      contentWrap.style.gridTemplateColumns = "minmax(0,1fr)";
+      contentWrap.style.gap = "14px";
+      box.style.width = "92vw";
+      box.style.padding = "18px 14px 14px";
+      leftCol.style.order = "1";
+      rightCol.style.order = "2";
+      rightCol.style.marginTop = "2px";
+    }
+  } catch (_) {}
+
+  // ===== حدث الإرسال =====
   form.onsubmit = function (e) {
     e.preventDefault();
     msg.textContent = "";
@@ -964,6 +1029,7 @@ function buildGrandLaunchPopupDOM(widget) {
 
     submitBtn.disabled = true;
     submitBtn.textContent = "جاري حفظ بياناتك…";
+    submitBtn.appendChild(arrowSpan);
 
     var url = (PANEL_ORIGIN || "") + "/api/widgets/leads";
 
@@ -1004,35 +1070,494 @@ function buildGrandLaunchPopupDOM(widget) {
         submitBtn.appendChild(arrowSpan);
       });
   };
-
-  rightCol.appendChild(form);
-  rightCol.appendChild(msg);
-
-  contentWrap.appendChild(leftCol);
-  contentWrap.appendChild(rightCol);
-
-  box.appendChild(contentWrap);
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-
-  // ===== ميديا كويري بسيطة للجوال (عمود واحد) =====
-  try {
-    if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
-      contentWrap.style.gridTemplateColumns = "minmax(0,1fr)";
-      box.style.width = "92vw";
-      box.style.padding = "18px 16px 16px";
-    }
-  } catch (_) {}
 }
 
 
+// ================== ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
+function buildAdvancedSearchButton(widget) {
+  var cfg = widget.config || {};
+  var firestore = cfg.firestore || {};
+  var searchCfg = cfg.search || {};
+  var pos = cfg.position || {};
 
+  var projectId = firestore.projectId || "spare-parts-project-55319";
+  var apiKey =
+    firestore.apiKey || "AIzaSyB0qGrqutUtkFHKnyy7F73kyiDfcQhsDc";
+  var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
+  var maxParts = Number(searchCfg.maxParts || 5);
+  var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
+    /\/+$/,
+    ""
+  );
 
+  var buttonLabel = cfg.label || "اختيار السيارة";
+  var bottom = typeof pos.bottom === "number" ? pos.bottom : 90;
+  var side = pos.side === "right" ? "right" : "left";
 
+  // ============ 0) Firestore REST ============
 
+  const base =
+    "https://firestore.googleapis.com/v1/projects/" +
+    projectId +
+    "/databases/(default)/documents/meta";
+  const docUrl = function (name) {
+    return base + "/" + name + "?key=" + apiKey;
+  };
 
+  function fromFsValue(v) {
+    if (!v) return null;
+    if ("stringValue" in v) return v.stringValue;
+    if ("integerValue" in v) return parseInt(v.integerValue, 10);
+    if ("doubleValue" in v) return v.doubleValue;
+    if ("booleanValue" in v) return !!v.booleanValue;
+    if ("nullValue" in v) return null;
+    if ("arrayValue" in v)
+      return (v.arrayValue.values || []).map(fromFsValue);
+    if ("mapValue" in v) {
+      var out = {};
+      var f = v.mapValue.fields || {};
+      for (var k in f) out[k] = fromFsValue(f[k]);
+      return out;
+    }
+    return v;
+  }
 
+  async function getDoc(name) {
+    const r = await fetch(docUrl(name));
+    if (!r.ok) throw new Error(name + ": " + r.status + " " + (await r.text()));
+    const j = await r.json();
+    return fromFsValue(j.fields && j.fields.value);
+  }
+
+  // ============ 1) حاويات البيانات ============
+  var SECTION_TREE = {};
+  var CATEGORIES = [];
+
+  async function loadData() {
+    const tree = await getDoc(metaDoc);
+    SECTION_TREE = tree && typeof tree === "object" ? tree : {};
+
+    var cats = [];
+    var entries = Object.entries(SECTION_TREE);
+    for (var i = 0; i < entries.length; i++) {
+      var brandKey = entries[i][0];
+      var brandNode = entries[i][1];
+      if (!brandNode || !brandNode._meta) continue;
+
+      var b = brandNode._meta;
+      var brandObj = {
+        id: b.id,
+        slug: (b.slug || "").trim(),
+        name: b.name,
+        children: [],
+      };
+
+      var order = Array.isArray(b.carOrder) ? b.carOrder.slice() : [];
+      var mapCarKeys = Object.keys(brandNode).filter(function (k) {
+        return k !== "_meta";
+      });
+      mapCarKeys.forEach(function (k) {
+        if (order.indexOf(k) === -1) order.push(k);
+      });
+
+      for (var j = 0; j < order.length; j++) {
+        var carKey = order[j];
+        var carNode = brandNode[carKey];
+        if (!carNode || !carNode._meta) continue;
+
+        var cm = carNode._meta;
+        var carObj = {
+          id: cm.id,
+          slug: (cm.slug || "").trim(),
+          name: cm.name,
+          children: [],
+        };
+
+        var yearsArr = Array.isArray(carNode.years) ? carNode.years : [];
+        yearsArr.forEach(function (yr) {
+          if (!yr || !yr.id) return;
+          carObj.children.push({
+            id: yr.id,
+            name: yr.name,
+            slug: yr.slug,
+          });
+        });
+
+        carObj.__brandKey = brandKey;
+        carObj.__carKey = carKey;
+
+        brandObj.children.push(carObj);
+      }
+
+      cats.push(brandObj);
+    }
+
+    CATEGORIES = cats;
+  }
+
+  // ============ 4) UI + منطق (نفس سكربت اختيار السيارة) ============
+
+  var openBtn = document.createElement("button");
+  openBtn.className = "popup-open-btn";
+  openBtn.textContent = buttonLabel;
+  document.body.appendChild(openBtn);
+
+  try {
+    openBtn.style.position = "fixed";
+    openBtn.style.zIndex = "2147483647";
+    openBtn.style.bottom = bottom + "px";
+    if (side === "right") openBtn.style.right = "18px";
+    else openBtn.style.left = "18px";
+  } catch (_) {}
+
+  var popup = document.createElement("div");
+  popup.className = "fullpage-popup";
+  popup.innerHTML =
+    '<div class="popup-content">' +
+    '<div class="popup-progress"></div>' +
+    '<div class="popup-top-bar">' +
+    '<button class="popup-back" style="display:none">رجوع</button>' +
+    '<input class="popup-search" type="text" placeholder="بحث..." autocomplete="off">' +
+    '<button class="popup-close">×</button>' +
+    "</div>" +
+    '<div class="popup-crumbs"></div>' +
+    '<div class="popup-selected-options"></div>' +
+    '<div class="popup-list"></div>' +
+    '<button class="popup-confirm" style="display:none">تأكيد</button>' +
+    "</div>";
+  document.body.appendChild(popup);
+
+  var state = {
+    brand: null,
+    type: null,
+    model: null,
+    section: null,
+    options: [],
+  };
+  var step = 0;
+
+  var backBtn = popup.querySelector(".popup-back");
+  var closeBtn = popup.querySelector(".popup-close");
+  var searchInput = popup.querySelector(".popup-search");
+  var listDiv = popup.querySelector(".popup-list");
+  var crumbs = popup.querySelector(".popup-crumbs");
+  var confirmBtn = popup.querySelector(".popup-confirm");
+  var selectedOptionsDiv = popup.querySelector(".popup-selected-options");
+  var progressDiv = popup.querySelector(".popup-progress");
+  var stepsList = [
+    { label: "01" },
+    { label: "02" },
+    { label: "03" },
+    { label: "04" },
+    { label: "05" },
+  ];
+
+  function setProgressBar(currentStep) {
+    progressDiv.innerHTML = stepsList
+      .map(function (s, i) {
+        return (
+          '<div class="popup-step' +
+          (i < currentStep ? " done" : "") +
+          (i === currentStep ? " current" : "") +
+          '" data-step="' +
+          i +
+          '" ' +
+          (i < currentStep ? 'tabindex="0"' : "") +
+          ">" +
+          '<span class="step-num">' +
+          s.label +
+          "</span>" +
+          '<span class="checkmark">✓</span>' +
+          "</div>"
+        );
+      })
+      .join("");
+
+    Array.prototype.forEach.call(
+      progressDiv.querySelectorAll(".popup-step.done"),
+      function (el) {
+        el.onclick = function () {
+          var stepIdx = Number(el.getAttribute("data-step"));
+          if (stepIdx < step) {
+            if (stepIdx < 4) state.options = [];
+            if (stepIdx < 3) state.section = null;
+            if (stepIdx < 2) state.model = null;
+            if (stepIdx < 1) state.type = null;
+            renderStep(stepIdx);
+          }
+        };
+      }
+    );
+  }
+
+  function getRawCarNode(selectedType) {
+    if (
+      !selectedType ||
+      !selectedType.__brandKey ||
+      !selectedType.__carKey
+    )
+      return null;
+    var brandNode = SECTION_TREE[selectedType.__brandKey];
+    if (!brandNode) return null;
+    var carNode = brandNode[selectedType.__carKey];
+    return carNode && carNode._meta ? carNode : null;
+  }
+
+  function getSectionsOfSelectedCar() {
+    var rawCar = getRawCarNode(state.type);
+    var secs = Array.isArray(rawCar && rawCar.sections)
+      ? rawCar.sections
+      : [];
+    return secs.map(function (s) {
+      return {
+        id: s.id,
+        slug: s.slug,
+        name: s.name,
+        options: Array.isArray(s.options) ? s.options.slice() : [],
+      };
+    });
+  }
+
+  function renderStep(newStep) {
+    step = newStep;
+    setProgressBar(step);
+    listDiv.innerHTML = "";
+    searchInput.value = "";
+    confirmBtn.style.display = "none";
+    selectedOptionsDiv.style.display = "none";
+    selectedOptionsDiv.innerHTML = "";
+    crumbs.innerHTML = "";
+
+    if (state.brand)
+      crumbs.innerHTML += "🏢 " + (state.brand.name || "—") + " / ";
+    if (state.type) crumbs.innerHTML += (state.type.name || "—") + " / ";
+    if (state.model) crumbs.innerHTML += (state.model.name || "—") + " / ";
+    if (state.section)
+      crumbs.innerHTML += (state.section.name || "—") + " / ";
+
+    if (step === 0) {
+      CATEGORIES.forEach(function (brand) {
+        var btn = document.createElement("button");
+        btn.textContent = brand.name || "—";
+        if (state.brand && state.brand.id === brand.id)
+          btn.className = "selected";
+        btn.onclick = function () {
+          state.brand = brand;
+          state.type = null;
+          state.model = null;
+          state.section = null;
+          state.options = [];
+          renderStep(1);
+        };
+        listDiv.appendChild(btn);
+      });
+    } else if (step === 1) {
+      (state.brand && state.brand.children ? state.brand.children : []).forEach(
+        function (type) {
+          var btn = document.createElement("button");
+          btn.textContent = type.name;
+          if (state.type && state.type.id === type.id)
+            btn.className = "selected";
+          btn.onclick = function () {
+            state.type = type;
+            state.model = null;
+            state.section = null;
+            state.options = [];
+            renderStep(2);
+          };
+          listDiv.appendChild(btn);
+        }
+      );
+    } else if (step === 2) {
+      (state.type && state.type.children ? state.type.children : []).forEach(
+        function (model) {
+          var btn = document.createElement("button");
+          btn.textContent = model.name;
+          if (state.model && state.model.id === model.id)
+            btn.className = "selected";
+          btn.onclick = function () {
+            state.model = model;
+            state.section = null;
+            state.options = [];
+            renderStep(3);
+          };
+          listDiv.appendChild(btn);
+        }
+      );
+    } else if (step === 3) {
+      var sections = getSectionsOfSelectedCar();
+      sections.forEach(function (section) {
+        var btn = document.createElement("button");
+        btn.textContent = section.name;
+        if (state.section && state.section.id === section.id)
+          btn.className = "selected";
+        btn.onclick = function () {
+          state.section = section;
+          state.options = [];
+          renderStep(4);
+        };
+        listDiv.appendChild(btn);
+      });
+    } else if (step === 4) {
+      selectedOptionsDiv.style.display = "flex";
+      confirmBtn.style.display = "block";
+      selectedOptionsDiv.innerHTML = "";
+
+      (state.options || []).forEach(function (opt) {
+        var tag = document.createElement("span");
+        tag.className = "selected-tag";
+        tag.textContent = opt;
+        var remove = document.createElement("button");
+        remove.innerHTML = "×";
+        remove.onclick = function () {
+          state.options = state.options.filter(function (x) {
+            return x !== opt;
+          });
+          renderStep(4);
+        };
+        tag.appendChild(remove);
+        selectedOptionsDiv.appendChild(tag);
+      });
+
+      var options = Array.isArray(state.section && state.section.options)
+        ? state.section.options
+        : [];
+      options.forEach(function (option) {
+        var btn = document.createElement("button");
+        btn.textContent = option;
+        btn.className = state.options.indexOf(option) >= 0 ? "selected" : "";
+        btn.onclick = function () {
+          if (state.options.indexOf(option) < 0) {
+            if (state.options.length < maxParts) state.options.push(option);
+          } else {
+            state.options = state.options.filter(function (x) {
+              return x !== option;
+            });
+          }
+          renderStep(4);
+        };
+        listDiv.appendChild(btn);
+      });
+
+      confirmBtn.onclick = function () {
+        var carNodeRaw = getRawCarNode(state.type);
+        var carMeta = (carNodeRaw && carNodeRaw._meta) || {};
+        var yearNode = state.model;
+        var sectionObj = state.section;
+        var brandMeta = state.brand || {};
+
+        if (
+          !brandMeta.id ||
+          !carMeta.id ||
+          !carMeta.slug ||
+          !yearNode ||
+          !yearNode.id ||
+          !sectionObj ||
+          !sectionObj.id
+        ) {
+          alert(
+            "ناقص معرّفات: تأكد من اختيار الشركة والسيارة والسنة والقسم وأن الـ slug موجود."
+          );
+          return;
+        }
+
+        var companyId = brandMeta.id;
+        var carSlug = (carMeta.slug || "").trim();
+        var categoryId = carMeta.id;
+        var modelId = yearNode.id;
+        var sectionId = sectionObj.id;
+
+        var url =
+          targetDomain +
+          "/category/" +
+          encodeURIComponent(carSlug) +
+          "?filters[company]=" +
+          encodeURIComponent(companyId) +
+          "&filters[category]=" +
+          encodeURIComponent(categoryId) +
+          "&filters[category_id]=" +
+          encodeURIComponent(modelId) +
+          "&filters[brand_id]=" +
+          encodeURIComponent(sectionId);
+
+        if (state.options && state.options.length) {
+          url +=
+            "&keyword=" + encodeURIComponent(state.options.join("||"));
+        }
+
+        window.location.href = url;
+      };
+    }
+
+    searchInput.oninput = function () {
+      var val = this.value.trim();
+      Array.prototype.forEach.call(listDiv.children, function (btn) {
+        btn.style.display =
+          !val || btn.textContent.indexOf(val) !== -1 ? "" : "none";
+      });
+    };
+
+    backBtn.style.display = step > 0 ? "" : "none";
+  }
+
+  openBtn.onclick = function () {
+    var loadingBtnText = openBtn.textContent;
+    openBtn.disabled = true;
+    openBtn.textContent = "جار التحميل...";
+    popup.classList.add("active");
+    state = {
+      brand: null,
+      type: null,
+      model: null,
+      section: null,
+      options: [],
+    };
+    loadData()
+      .then(function () {
+        renderStep(0);
+      })
+      .catch(function (e) {
+        console.error(e);
+        alert(
+          "تعذر تحميل SECTION_OPTIONS — تأكد من الوثيقة والصلاحيات."
+        );
+        renderStep(0);
+      })
+      .finally(function () {
+        openBtn.disabled = false;
+        openBtn.textContent = loadingBtnText;
+      });
+  };
+
+  closeBtn.onclick = function () {
+    popup.classList.remove("active");
+  };
+
+  backBtn.onclick = function () {
+    if (step === 4) renderStep(3);
+    else if (step === 3) {
+      state.section = null;
+      state.options = [];
+      renderStep(2);
+    } else if (step === 2) {
+      state.model = null;
+      state.section = null;
+      state.options = [];
+      renderStep(1);
+    } else if (step === 1) {
+      state.type = null;
+      state.model = null;
+      state.section = null;
+      state.options = [];
+      renderStep(0);
+    } else popup.classList.remove("active");
+  };
+
+  popup.onclick = function (e) {
+    if (e.target === popup) popup.classList.remove("active");
+  };
+}
 
     // ========== تحميل مكتبة Choices (CSS + JS) ==========
     function ensureChoicesAssets() {
@@ -1744,6 +2269,8 @@ function buildGrandLaunchPopupDOM(widget) {
               }
             } else if (w.kind === "filter_bar" && w.template === "filter_hero_v1") {
               buildFilterHeroDom(w);
+            } else if (w.kind === "filter_bar" && w.template === "car_picker_button_v1") {
+              buildAdvancedSearchButton(w);
             }
           });
         })
