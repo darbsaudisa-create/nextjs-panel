@@ -140,64 +140,63 @@ export async function GET(_req: NextRequest) {
       if (!legacy || legacy === "all_pages") return true;
       return true;
     }
-
- // ============= STYLE VARIANTS FOR SALE POPUP الوان البوب اب ـــــــــ=============
+// ============= STYLE VARIANTS FOR SALE POPUP الوان البوب اب ـــــــــ=============
 function applyClassicStyle(box, content) {
   // أبيض نظيف ستايل iOS light
-  box.style.background = "rgba(248,250,252,0.96)";
-  box.style.borderRadius = "22px";
+  box.style.background = "rgba(248,250,252,0.98)";
+  box.style.borderRadius = "26px";
   box.style.boxShadow =
-    "0 28px 70px rgba(15,23,42,0.20), 0 0 0 1px rgba(226,232,240,0.9)";
+    "0 26px 70px rgba(15,23,42,0.20), 0 0 0 1px rgba(226,232,240,0.9)";
   box.style.border = "1px solid rgba(226,232,240,0.9)";
-  box.style.backdropFilter = "blur(18px)";
+  box.style.backdropFilter = "blur(22px)";
   content.style.textAlign = "center";
-  content.style.color = "#0f172a";
+  content.style.color = "#020617";
 }
 
 function applyLuxuryStyle(box, content) {
   // دارك فاخر – قريب من Apple Music / Wallet
   box.style.background =
-    "radial-gradient(circle at top, #020617, #020617 35%, #020617)";
-  box.style.borderRadius = "26px";
+    "radial-gradient(circle at top, #020617, #020617 40%, #020617)";
+  box.style.borderRadius = "28px";
   box.style.boxShadow =
-    "0 32px 90px rgba(15,23,42,0.95), 0 0 0 1px rgba(30,64,175,0.45)";
-  box.style.border = "1px solid rgba(148,163,184,0.55)";
-  box.style.backdropFilter = "blur(22px)";
+    "0 32px 100px rgba(15,23,42,0.98), 0 0 0 1px rgba(31,41,55,0.95)";
+  box.style.border = "1px solid rgba(51,65,85,0.95)";
+  box.style.backdropFilter = "blur(28px)";
   content.style.textAlign = "center";
   content.style.color = "#e5e7eb";
 }
 
 function applyPremiumStyle(box, content) {
-  // فاتح راقي – كأنه كرت إعدادات في iOS
+  // فاتح راقي – كرت إعدادات / Apple Pay
   box.style.background =
-    "linear-gradient(145deg, #f9fafb, #ffffff 40%, #eef2ff)";
-  box.style.borderRadius = "22px";
+    "linear-gradient(145deg, #ffffff, #f9fafb 45%, #eef2ff)";
+  box.style.borderRadius = "26px";
   box.style.boxShadow =
-    "0 24px 65px rgba(15,23,42,0.22), 0 0 0 1px rgba(229,231,235,0.9)";
-  box.style.border = "1px solid rgba(229,231,235,0.9)";
-  box.style.backdropFilter = "blur(14px)";
+    "0 24px 65px rgba(15,23,42,0.18), 0 0 0 1px rgba(229,231,235,0.95)";
+  box.style.border = "1px solid rgba(229,231,235,0.95)";
+  box.style.backdropFilter = "blur(18px)";
   content.style.textAlign = "left";
-  content.style.color = "#0f172a";
+  content.style.color = "#020617";
 }
 
 function applyGenZStyle(box, content) {
-  // Gen Z بس رايق: مو حفلة ألوان، توهج بسيط حوالين الزوايا
+  // Gen Z رايق – لمعة خفيفة حوالين الحواف بدون حفلة ألوان
   box.style.background =
-    "radial-gradient(circle at top left, rgba(96,165,250,0.2), transparent 55%)," +
-    "radial-gradient(circle at bottom right, rgba(244,114,182,0.22), transparent 55%)," +
-    "linear-gradient(145deg, #020617, #020617 45%, #020617)";
-  box.style.borderRadius = "26px";
+    "radial-gradient(circle at top left, rgba(59,130,246,0.24), transparent 55%)," +
+    "radial-gradient(circle at bottom right, rgba(244,114,182,0.24), transparent 55%)," +
+    "linear-gradient(145deg, #020617, #020617 50%, #020617)";
+  box.style.borderRadius = "28px";
   box.style.boxShadow =
-    "0 32px 100px rgba(15,23,42,0.98), 0 0 0 1px rgba(30,64,175,0.5)";
-  box.style.border = "1px solid rgba(51,65,85,0.95)";
-  box.style.backdropFilter = "blur(24px)";
+    "0 32px 110px rgba(15,23,42,0.98), 0 0 0 1px rgba(30,64,175,0.6)";
+  box.style.border = "1px solid rgba(30,64,175,0.6)";
+  box.style.backdropFilter = "blur(28px)";
   content.style.textAlign = "center";
   content.style.color = "#e5e7eb";
 }
 
 
-    // ================== تنسيق البوب اب ــــ==================
-    // ================== SALE POPUP ==================
+// ================== تنسيق البوب اب ــــ==================
+// ================== SALE POPUP ==================
 function buildSalePopupDOM(widget) {
   var cfg = widget.config || {};
   var styleVariant = cfg.style || "classic";
@@ -229,26 +228,25 @@ function buildSalePopupDOM(widget) {
   overlay.style.padding = "16px";
   overlay.style.backdropFilter = "blur(12px)";
 
-  // البوكس (ستايل قريب من أبل)
+  // البوكس (الأساس، الستايل النهائي يطبّق من applyXStyle)
   var box = document.createElement("div");
   box.style.width = "min(90vw, 520px)";
   box.style.position = "relative";
   box.style.fontFamily =
     "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
   box.style.overflow = "hidden";
-  box.style.borderRadius = "28px";
-  box.style.background =
-    "linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.88))";
-  box.style.border = "1px solid rgba(148,163,184,0.45)";
+  box.style.borderRadius = "26px";
+  box.style.border = "1px solid rgba(148,163,184,0.35)";
   box.style.boxShadow =
-    "0 28px 80px rgba(15,23,42,0.85), 0 0 0 1px rgba(15,23,42,0.6) inset";
+    "0 28px 80px rgba(15,23,42,0.75)";
   box.style.color = "#e5e7eb";
-  box.style.backdropFilter = "blur(24px)";
+  box.style.backdropFilter = "blur(22px)";
   box.style.transform = "translateY(0)";
-  box.style.transition = "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out";
+  box.style.transition =
+    "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out";
   box.style.opacity = "1";
 
-  // زر الإغلاق – ستايل أنظف
+  // زر الإغلاق – ستايل iOS
   var closeBtn = document.createElement("button");
   closeBtn.innerHTML = "&times;";
   closeBtn.style.position = "absolute";
@@ -312,7 +310,7 @@ function buildSalePopupDOM(widget) {
   content.style.padding = "20px 22px 18px";
   content.style.position = "relative";
 
-  // لو حاب تبقي system الستايلات القديمة، نترك سويتش الستايل كما هو
+  // تطبيق الستايل المختار
   if (styleVariant === "classic") {
     applyClassicStyle(box, content);
   } else if (styleVariant === "luxury") {
@@ -325,35 +323,10 @@ function buildSalePopupDOM(widget) {
     applyClassicStyle(box, content);
   }
 
-  // Badge فوق العنوان – ستايل بسيط وأنيق
-  var badge = document.createElement("div");
-  badge.textContent = "عرض مميز";
-  badge.style.display = "inline-flex";
-  badge.style.alignItems = "center";
-  badge.style.gap = "6px";
-  badge.style.padding = "4px 12px";
-  badge.style.borderRadius = "999px";
-  badge.style.fontSize = "11px";
-  badge.style.fontWeight = "700";
-  badge.style.background = "rgba(15,23,42,0.85)";
-  badge.style.border = "1px solid rgba(148,163,184,0.6)";
-  badge.style.color = "#e5e7eb";
-  badge.style.marginBottom = "8px";
-  badge.style.textTransform = "uppercase";
-  badge.style.letterSpacing = "0.12em";
-
-  var badgeDot = document.createElement("span");
-  badgeDot.style.width = "6px";
-  badgeDot.style.height = "6px";
-  badgeDot.style.borderRadius = "999px";
-  badgeDot.style.background = "rgba(52,211,153,1)";
-  badge.appendChild(badgeDot);
-
-  var badgeText = document.createElement("span");
-  badgeText.textContent = "عرض مميز";
-  badge.appendChild(badgeText);
-
-  content.appendChild(badge);
+  // نحدد ألوان النصوص حسب الستايل (عشان ما يطلع أبيض على أبيض)
+  var isDarkStyle = styleVariant === "luxury" || styleVariant === "genz";
+  var headingColor = isDarkStyle ? "#f9fafb" : "#020617";
+  var bodyColor = isDarkStyle ? "rgba(148,163,184,0.96)" : "rgba(55,65,81,0.96)";
 
   // عنوان
   if (headingBlock.enabled && heading) {
@@ -363,7 +336,7 @@ function buildSalePopupDOM(widget) {
     h.style.fontWeight = "800";
     h.style.margin = "0 0 8px";
     h.style.letterSpacing = "0.01em";
-    h.style.color = "#f9fafb";
+    h.style.color = headingColor;
     h.style.lineHeight = "1.35";
     content.appendChild(h);
   }
@@ -374,7 +347,7 @@ function buildSalePopupDOM(widget) {
     p.textContent = body;
     p.style.fontSize = "14px";
     p.style.margin = "0 0 16px";
-    p.style.color = "rgba(148,163,184,0.96)";
+    p.style.color = bodyColor;
     p.style.lineHeight = "1.7";
     content.appendChild(p);
   }
@@ -394,7 +367,9 @@ function buildSalePopupDOM(widget) {
     counterLabel.style.fontSize = "11px";
     counterLabel.style.textTransform = "uppercase";
     counterLabel.style.letterSpacing = "0.09em";
-    counterLabel.style.color = "rgba(148,163,184,0.9)";
+    counterLabel.style.color = isDarkStyle
+      ? "rgba(148,163,184,0.9)"
+      : "rgba(100,116,139,0.95)";
     counterLabel.style.marginBottom = "2px";
 
     var counterSpan = document.createElement("div");
@@ -403,7 +378,7 @@ function buildSalePopupDOM(widget) {
     counterSpan.style.letterSpacing = "0.03em";
     counterSpan.style.fontVariantNumeric = "tabular-nums";
     counterSpan.textContent = "0";
-    counterSpan.style.color = "#f9fafb";
+    counterSpan.style.color = headingColor;
 
     counterLeft.appendChild(counterLabel);
     counterLeft.appendChild(counterSpan);
@@ -414,11 +389,15 @@ function buildSalePopupDOM(widget) {
     chip.style.fontSize = "11px";
     chip.style.padding = "4px 10px";
     chip.style.borderRadius = "999px";
-    chip.style.background = "rgba(15,23,42,0.85)";
-    chip.style.border = "1px solid rgba(148,163,184,0.6)";
+    chip.style.background = isDarkStyle
+      ? "rgba(15,23,42,0.85)"
+      : "rgba(241,245,249,0.95)";
+    chip.style.border = isDarkStyle
+      ? "1px solid rgba(148,163,184,0.6)"
+      : "1px solid rgba(148,163,184,0.5)";
     chip.style.textTransform = "uppercase";
     chip.style.letterSpacing = "0.09em";
-    chip.style.color = "#e5e7eb";
+    chip.style.color = isDarkStyle ? "#e5e7eb" : "#111827";
 
     counterWrap.appendChild(chip);
     content.appendChild(counterWrap);
@@ -454,26 +433,32 @@ function buildSalePopupDOM(widget) {
     btn.style.fontWeight = "700";
     btn.style.borderRadius = "999px";
     btn.style.padding = "11px 24px";
-    btn.style.color = "#020617";
     btn.style.textDecoration = "none";
     btn.style.background = buttonColor || "#f97316";
     btn.style.backgroundImage =
       "linear-gradient(135deg, rgba(255,255,255,0.65), transparent)";
-    btn.style.boxShadow = "0 16px 40px rgba(15,23,42,0.55)";
+    btn.style.boxShadow = isDarkStyle
+      ? "0 18px 45px rgba(15,23,42,0.85)"
+      : "0 18px 40px rgba(15,23,42,0.25)";
     btn.style.marginTop = "4px";
     btn.style.border = "1px solid rgba(15,23,42,0.12)";
     btn.style.transition =
       "transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease-out, filter 160ms ease-out";
     btn.style.fontVariantNumeric = "tabular-nums";
+    btn.style.color = isDarkStyle ? "#f9fafb" : "#020617";
 
     btn.onmouseenter = function () {
       btn.style.transform = "translateY(-1.5px)";
-      btn.style.boxShadow = "0 22px 50px rgba(15,23,42,0.8)";
+      btn.style.boxShadow = isDarkStyle
+        ? "0 24px 55px rgba(15,23,42,0.95)"
+        : "0 22px 50px rgba(15,23,42,0.28)";
       btn.style.filter = "brightness(1.03)";
     };
     btn.onmouseleave = function () {
       btn.style.transform = "translateY(0)";
-      btn.style.boxShadow = "0 16px 40px rgba(15,23,42,0.55)";
+      btn.style.boxShadow = isDarkStyle
+        ? "0 18px 45px rgba(15,23,42,0.85)"
+        : "0 18px 40px rgba(15,23,42,0.25)";
       btn.style.filter = "none";
     };
 
@@ -495,24 +480,29 @@ function buildSalePopupDOM(widget) {
     couponWrap.style.alignItems = "center";
     couponWrap.style.padding = "10px 12px";
     couponWrap.style.borderRadius = "16px";
-    couponWrap.style.background = "rgba(15,23,42,0.85)";
+    couponWrap.style.background = isDarkStyle
+      ? "rgba(15,23,42,0.9)"
+      : "rgba(241,245,249,0.98)";
     couponWrap.style.border = "1px dashed rgba(148,163,184,0.7)";
     couponWrap.style.gap = "10px";
 
     var couponLabel = document.createElement("span");
     couponLabel.textContent = "استخدم كود الخصم:";
     couponLabel.style.fontSize = "12px";
-    couponLabel.style.color = "rgba(148,163,184,0.96)";
+    couponLabel.style.color = isDarkStyle
+      ? "rgba(148,163,184,0.96)"
+      : "rgba(100,116,139,0.98)";
 
     var couponCode = document.createElement("span");
     couponCode.textContent = couponCfg.code;
-    couponCode.style.fontFamily = "SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
+    couponCode.style.fontFamily =
+      "SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
     couponCode.style.fontSize = "13px";
     couponCode.style.fontWeight = "700";
     couponCode.style.padding = "6px 10px";
     couponCode.style.borderRadius = "999px";
-    couponCode.style.background = "#f9fafb";
-    couponCode.style.color = "#020617";
+    couponCode.style.background = isDarkStyle ? "#f9fafb" : "#020617";
+    couponCode.style.color = isDarkStyle ? "#020617" : "#f9fafb";
 
     var rightPart = document.createElement("div");
     rightPart.style.display = "flex";
@@ -530,7 +520,9 @@ function buildSalePopupDOM(widget) {
     copyBtn.style.fontSize = "11px";
     copyBtn.style.fontWeight = "600";
     copyBtn.style.cursor = "pointer";
-    copyBtn.style.background = "rgba(15,23,42,0.9)";
+    copyBtn.style.background = isDarkStyle
+      ? "rgba(15,23,42,0.9)"
+      : "rgba(15,23,42,0.95)";
     copyBtn.style.color = "#f9fafb";
     copyBtn.style.transition =
       "background 140ms ease-out, transform 140ms ease-out, box-shadow 140ms ease-out";
@@ -541,7 +533,9 @@ function buildSalePopupDOM(widget) {
       copyBtn.style.boxShadow = "0 10px 20px rgba(15,23,42,0.75)";
     };
     copyBtn.onmouseleave = function () {
-      copyBtn.style.background = "rgba(15,23,42,0.9)";
+      copyBtn.style.background = isDarkStyle
+        ? "rgba(15,23,42,0.9)"
+        : "rgba(15,23,42,0.95)";
       copyBtn.style.transform = "translateY(0)";
       copyBtn.style.boxShadow = "none";
     };
