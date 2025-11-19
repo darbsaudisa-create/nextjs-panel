@@ -583,14 +583,12 @@ export async function GET(_req: NextRequest) {
       document.body.appendChild(overlay);
     }
 
-   // ================== GRAND LAUNCH POPUP (FORM) ==================
-// ملاحظة: هذا الويجت مخصص لبوب أب "افتتاح المتجر" مع نموذج يجمع بيانات العملاء (اسم / جوال / إيميل)
-// ويُستخدم عادة قبل افتتاح المتجر أو أثناء الإطلاق لجمع leads للحملة الافتتاحية.
+  // ================== GRAND LAUNCH POPUP (FORM) ==================
 function buildGrandLaunchPopupDOM(widget) {
   var cfg = widget.config || {};
-  var badgeText = cfg.badgeText || "افتتاح ضخم";
+  var badgeText = cfg.badgeText || "افتتاح المتجر";
   var titleText =
-    cfg.titleText || "انتظرونا... سيتم افتتاح المتجر قريبًا";
+    cfg.titleText || "انتظرونا… سيتم افتتاح المتجر قريبًا";
   var subText =
     cfg.subText ||
     "نجهّز تجربة تسوّق مختلفة، بأسعار قوية وخدمة أسرع.";
@@ -602,7 +600,7 @@ function buildGrandLaunchPopupDOM(widget) {
   var emailField = formCfg.email || { enabled: false, required: false };
   var submitLabel = formCfg.submitLabel || "إرسال البيانات";
 
-  // ===== الخلفية (ستارة زجاجية هادئة) =====
+  // ===== الخلفية =====
   var overlay = document.createElement("div");
   overlay.style.position = "fixed";
   overlay.style.inset = "0";
@@ -610,30 +608,29 @@ function buildGrandLaunchPopupDOM(widget) {
   overlay.style.display = "flex";
   overlay.style.alignItems = "center";
   overlay.style.justifyContent = "center";
-  overlay.style.background = "rgba(15,23,42,0.55)";
-  overlay.style.backdropFilter = "blur(14px)";
-  overlay.style.webkitBackdropFilter = "blur(14px)";
+  overlay.style.background = "rgba(15,23,42,0.45)";
+  overlay.style.backdropFilter = "blur(12px)";
+  overlay.style.webkitBackdropFilter = "blur(12px)";
 
-  // توهج خفيف
+  // توهج خفيف جدًا
   var glow = document.createElement("div");
   glow.style.position = "absolute";
   glow.style.inset = "0";
   glow.style.pointerEvents = "none";
   glow.style.background =
-    "radial-gradient(circle at top,rgba(56,189,248,0.20),rgba(37,99,235,0.08),transparent 65%)";
+    "radial-gradient(circle at top,rgba(148,163,184,0.20),transparent 65%)";
   overlay.appendChild(glow);
 
-  // ===== الكرت الرئيسي (card ستايل أبل) =====
+  // ===== الكرت الرئيسي =====
   var box = document.createElement("div");
-  box.style.width = "min(94vw, 760px)";
-  box.style.background =
-    "linear-gradient(135deg,rgba(15,23,42,0.95),rgba(15,23,42,0.90))";
-  box.style.borderRadius = "26px";
+  box.style.width = "min(92vw, 740px)";
+  box.style.background = "rgba(15,23,42,0.97)";
+  box.style.borderRadius = "24px";
   box.style.position = "relative";
   box.style.color = "#e5e7eb";
   box.style.padding = "18px 18px 16px";
   box.style.boxShadow =
-    "0 28px 80px rgba(15,23,42,0.95), 0 0 0 1px rgba(148,163,184,0.45)";
+    "0 24px 70px rgba(15,23,42,0.95), 0 0 0 1px rgba(31,41,55,0.8)";
   box.style.fontFamily =
     "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
   box.style.overflow = "hidden";
@@ -641,35 +638,35 @@ function buildGrandLaunchPopupDOM(widget) {
   var innerBorder = document.createElement("div");
   innerBorder.style.position = "absolute";
   innerBorder.style.inset = "0";
-  innerBorder.style.borderRadius = "26px";
-  innerBorder.style.border = "1px solid rgba(148,163,184,0.28)";
+  innerBorder.style.borderRadius = "24px";
+  innerBorder.style.border = "1px solid rgba(75,85,99,0.5)";
   innerBorder.style.pointerEvents = "none";
-  innerBorder.style.mixBlendMode = "screen";
   box.appendChild(innerBorder);
 
+  // شريط خفيف جداً
   var stripe = document.createElement("div");
   stripe.style.position = "absolute";
-  stripe.style.top = "-40px";
-  stripe.style.left = "-10%";
-  stripe.style.width = "70%";
-  stripe.style.height = "120px";
+  stripe.style.top = "-30px";
+  stripe.style.left = "-15%";
+  stripe.style.width = "60%";
+  stripe.style.height = "90px";
   stripe.style.background =
-    "linear-gradient(120deg,transparent,rgba(59,130,246,0.40),transparent)";
-  stripe.style.opacity = "0.65";
+    "linear-gradient(115deg,transparent,rgba(148,163,184,0.30),transparent)";
+  stripe.style.opacity = "0.4";
   stripe.style.pointerEvents = "none";
   box.appendChild(stripe);
 
-  // ===== زر الإغلاق (دائري بسيط) =====
+  // ===== زر الإغلاق =====
   var closeBtn = document.createElement("button");
   closeBtn.innerHTML = "×";
   closeBtn.style.position = "absolute";
-  closeBtn.style.top = "14px";
-  closeBtn.style.left = "14px";
+  closeBtn.style.top = "12px";
+  closeBtn.style.left = "12px";
   closeBtn.style.width = "30px";
   closeBtn.style.height = "30px";
   closeBtn.style.borderRadius = "999px";
-  closeBtn.style.border = "1px solid rgba(148,163,184,.6)";
-  closeBtn.style.background = "rgba(15,23,42,0.95)";
+  closeBtn.style.border = "1px solid rgba(75,85,99,.9)";
+  closeBtn.style.background = "rgba(15,23,42,0.98)";
   closeBtn.style.color = "#e5e7eb";
   closeBtn.style.cursor = "pointer";
   closeBtn.style.fontSize = "18px";
@@ -678,14 +675,17 @@ function buildGrandLaunchPopupDOM(widget) {
   closeBtn.style.alignItems = "center";
   closeBtn.style.justifyContent = "center";
   closeBtn.style.zIndex = "2";
-  closeBtn.style.transition = "background 0.18s ease, transform 0.18s ease";
+  closeBtn.style.transition =
+    "background 0.16s ease, transform 0.16s ease, border-color 0.16s ease";
   closeBtn.onmouseenter = function () {
     closeBtn.style.background = "rgba(31,41,55,1)";
+    closeBtn.style.borderColor = "rgba(107,114,128,1)";
     closeBtn.style.transform = "scale(1.03)";
   };
   closeBtn.onmouseleave = function () {
-    closeBtn.style.background = "rgba(15,23,42,0.95)";
-    closeBtn.style.transform = "scale(1.0)";
+    closeBtn.style.background = "rgba(15,23,42,0.98)";
+    closeBtn.style.borderColor = "rgba(75,85,99,.9)";
+    closeBtn.style.transform = "scale(1)";
   };
   closeBtn.onclick = function () {
     if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
@@ -693,48 +693,37 @@ function buildGrandLaunchPopupDOM(widget) {
   };
   box.appendChild(closeBtn);
 
-  // ===== الشبكة العامة =====
+  // ===== المحتوى: عمودين =====
   var contentWrap = document.createElement("div");
   contentWrap.style.position = "relative";
   contentWrap.style.zIndex = "1";
   contentWrap.style.display = "grid";
-  contentWrap.style.gridTemplateColumns = "minmax(0,1.2fr) minmax(0,1.6fr)";
+  contentWrap.style.gridTemplateColumns = "minmax(0,1.1fr) minmax(0,1.7fr)";
   contentWrap.style.gap = "16px";
   contentWrap.style.alignItems = "stretch";
 
-  // ===== العمود الأيسر: الفورم في كرت زجاجي =====
+  // ================= العمود الأيسر – كرت الفورم =================
   var leftCol = document.createElement("div");
   leftCol.style.display = "flex";
   leftCol.style.alignItems = "stretch";
 
   var formCard = document.createElement("div");
   formCard.style.flex = "1 1 auto";
-  formCard.style.background =
-    "linear-gradient(145deg,rgba(15,23,42,0.95),rgba(15,23,42,0.85))";
-  formCard.style.borderRadius = "22px";
+  formCard.style.background = "rgba(15,23,42,0.98)";
+  formCard.style.borderRadius = "20px";
   formCard.style.boxShadow =
-    "0 22px 60px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
-  formCard.style.padding = "16px 14px 14px";
+    "0 18px 50px rgba(15,23,42,0.95), 0 0 0 1px rgba(55,65,81,0.95)";
+  formCard.style.padding = "16px 14px 12px";
   formCard.style.display = "flex";
   formCard.style.flexDirection = "column";
-  formCard.style.gap = "10px";
+  formCard.style.gap = "8px";
   formCard.style.position = "relative";
   formCard.style.overflow = "hidden";
-
-  var formCardGlow = document.createElement("div");
-  formCardGlow.style.position = "absolute";
-  formCardGlow.style.inset = "0";
-  formCardGlow.style.background =
-    "radial-gradient(circle at bottom left,rgba(59,130,246,0.28),transparent 55%)";
-  formCardGlow.style.pointerEvents = "none";
-  formCard.appendChild(formCardGlow);
 
   var formHeader = document.createElement("div");
   formHeader.style.display = "flex";
   formHeader.style.alignItems = "center";
   formHeader.style.justifyContent = "space-between";
-  formHeader.style.position = "relative";
-  formHeader.style.zIndex = "1";
 
   var formTitleText = document.createElement("div");
   formTitleText.textContent = "تنبيهي عند الافتتاح";
@@ -745,12 +734,12 @@ function buildGrandLaunchPopupDOM(widget) {
   var formDotWrap = document.createElement("div");
   formDotWrap.style.display = "inline-flex";
   formDotWrap.style.alignItems = "center";
-  formDotWrap.style.gap = "6px";
+  formDotWrap.style.gap = "4px";
 
   var formDot = document.createElement("span");
   formDot.textContent = "●";
+  formDot.style.fontSize = "9px";
   formDot.style.color = "#22c55e";
-  formDot.style.fontSize = "10px";
 
   var formDotLabel = document.createElement("span");
   formDotLabel.textContent = "نشط الآن";
@@ -769,8 +758,6 @@ function buildGrandLaunchPopupDOM(widget) {
   form.style.display = "flex";
   form.style.flexDirection = "column";
   form.style.gap = "8px";
-  form.style.position = "relative";
-  form.style.zIndex = "1";
 
   function makeInput(labelText, placeholder, type) {
     var wrap = document.createElement("div");
@@ -787,24 +774,24 @@ function buildGrandLaunchPopupDOM(widget) {
     input.placeholder = placeholder || "";
     input.style.width = "100%";
     input.style.borderRadius = "999px";
-    input.style.border = "1px solid rgba(148,163,184,.85)";
-    input.style.background = "rgba(15,23,42,0.96)";
+    input.style.border = "1px solid rgba(75,85,99,.9)";
+    input.style.background = "rgba(15,23,42,1)";
     input.style.color = "#f9fafb";
     input.style.fontSize = "12px";
     input.style.padding = "8px 12px";
     input.style.outline = "none";
     input.style.transition =
-      "border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease";
+      "border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease";
 
     input.onfocus = function () {
-      input.style.borderColor = "#60a5fa";
-      input.style.boxShadow = "0 0 0 1px rgba(96,165,250,0.9)";
+      input.style.borderColor = "#93c5fd";
+      input.style.boxShadow = "0 0 0 1px rgba(147,197,253,0.9)";
       input.style.background = "rgba(15,23,42,1)";
     };
     input.onblur = function () {
-      input.style.borderColor = "rgba(148,163,184,.85)";
+      input.style.borderColor = "rgba(75,85,99,.9)";
       input.style.boxShadow = "none";
-      input.style.background = "rgba(15,23,42,0.96)";
+      input.style.background = "rgba(15,23,42,1)";
     };
 
     wrap.appendChild(label);
@@ -834,44 +821,45 @@ function buildGrandLaunchPopupDOM(widget) {
     form.appendChild(r3.wrap);
   }
 
+  // ===== زر الإرسال – ستايل iOS هادي =====
   var submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = submitLabel;
   submitBtn.style.marginTop = "4px";
   submitBtn.style.borderRadius = "999px";
   submitBtn.style.border = "none";
-  submitBtn.style.background =
-    "linear-gradient(135deg,#38bdf8,#6366f1)";
-  submitBtn.style.color = "#f9fafb";
+  submitBtn.style.background = "#e5e7eb";
+  submitBtn.style.color = "#111827";
   submitBtn.style.fontSize = "13px";
   submitBtn.style.fontWeight = "600";
   submitBtn.style.padding = "9px 14px";
   submitBtn.style.cursor = "pointer";
   submitBtn.style.boxShadow =
-    "0 18px 38px rgba(99,102,241,0.65)";
+    "0 10px 26px rgba(15,23,42,0.55)";
   submitBtn.style.display = "flex";
   submitBtn.style.alignItems = "center";
   submitBtn.style.justifyContent = "center";
   submitBtn.style.gap = "6px";
   submitBtn.style.transition =
-    "transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease";
+    "transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease";
 
   var arrowSpan = document.createElement("span");
   arrowSpan.textContent = "➜";
   arrowSpan.style.fontSize = "13px";
+  arrowSpan.style.opacity = "0.75";
   submitBtn.appendChild(arrowSpan);
 
   submitBtn.onmouseenter = function () {
     submitBtn.style.transform = "translateY(-1px)";
     submitBtn.style.boxShadow =
-      "0 22px 44px rgba(79,70,229,0.8)";
-    submitBtn.style.filter = "brightness(1.03)";
+      "0 16px 30px rgba(15,23,42,0.75)";
+    submitBtn.style.background = "#f3f4f6";
   };
   submitBtn.onmouseleave = function () {
     submitBtn.style.transform = "translateY(0)";
     submitBtn.style.boxShadow =
-      "0 18px 38px rgba(99,102,241,0.65)";
-    submitBtn.style.filter = "brightness(1)";
+      "0 10px 26px rgba(15,23,42,0.55)";
+    submitBtn.style.background = "#e5e7eb";
   };
 
   form.appendChild(submitBtn);
@@ -884,16 +872,14 @@ function buildGrandLaunchPopupDOM(widget) {
 
   formCard.appendChild(form);
   formCard.appendChild(msg);
-
   leftCol.appendChild(formCard);
 
-  // ===== العمود الأيمن: النصوص الرئيسية =====
+  // ================= العمود الأيمن – النصوص =================
   var rightCol = document.createElement("div");
-  rightCol.style.position = "relative";
   rightCol.style.display = "flex";
   rightCol.style.flexDirection = "column";
   rightCol.style.justifyContent = "center";
-  rightCol.style.gap = "10px";
+  rightCol.style.gap = "8px";
 
   var badge = document.createElement("div");
   badge.style.display = "inline-flex";
@@ -903,14 +889,14 @@ function buildGrandLaunchPopupDOM(widget) {
   badge.style.borderRadius = "999px";
   badge.style.fontSize = "11px";
   badge.style.fontWeight = "600";
-  badge.style.background = "rgba(15,23,42,0.85)";
+  badge.style.background = "rgba(15,23,42,0.98)";
   badge.style.color = "#e5e7eb";
   badge.style.boxShadow =
-    "0 12px 30px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
+    "0 10px 26px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
 
   var badgeDot = document.createElement("span");
   badgeDot.textContent = "●";
-  badgeDot.style.fontSize = "10px";
+  badgeDot.style.fontSize = "9px";
   badgeDot.style.color = "#22c55e";
 
   var badgeTextNode = document.createElement("span");
@@ -927,7 +913,7 @@ function buildGrandLaunchPopupDOM(widget) {
   title.style.fontWeight = "800";
   title.style.letterSpacing = "0.01em";
   title.style.color = "#f9fafb";
-  title.style.lineHeight = "1.7";
+  title.style.lineHeight = "1.6";
   rightCol.appendChild(title);
 
   var sub = document.createElement("p");
@@ -946,7 +932,7 @@ function buildGrandLaunchPopupDOM(widget) {
   countWrap.style.gap = "8px";
 
   var countSpan = document.createElement("div");
-  countSpan.style.fontSize = "26px";
+  countSpan.style.fontSize = "24px";
   countSpan.style.fontWeight = "800";
   countSpan.style.fontVariantNumeric = "tabular-nums";
   countSpan.style.color = "#e5e7eb";
@@ -984,27 +970,27 @@ function buildGrandLaunchPopupDOM(widget) {
   miniNote.style.color = "#9ca3af";
   rightCol.appendChild(miniNote);
 
-  // ===== ربط كل شيء مع بعض =====
+  // ===== ربط الأعمدة =====
   contentWrap.appendChild(leftCol);
   contentWrap.appendChild(rightCol);
   box.appendChild(contentWrap);
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 
-  // ===== ميديا كويري للجوال =====
+  // ===== موبايل: عمود واحد مرتب =====
   try {
     if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
       contentWrap.style.gridTemplateColumns = "minmax(0,1fr)";
       contentWrap.style.gap = "14px";
       box.style.width = "92vw";
-      box.style.padding = "18px 14px 14px";
+      box.style.padding = "16px 14px 14px";
       leftCol.style.order = "1";
       rightCol.style.order = "2";
-      rightCol.style.marginTop = "2px";
+      rightCol.style.marginTop = "4px";
     }
   } catch (_) {}
 
-  // ===== حدث الإرسال =====
+  // ===== إرسال النموذج =====
   form.onsubmit = function (e) {
     e.preventDefault();
     msg.textContent = "";
@@ -1091,17 +1077,15 @@ function buildAdvancedSearchButton(widget) {
     ""
   );
 
-  var buttonLabel = cfg.label || "اختيار السيارة";
-  var bottom = typeof pos.bottom === "number" ? pos.bottom : 90;
-  var side = pos.side === "right" ? "right" : "left";
+  // النص اللي يجي من config.label
+  var buttonLabel = typeof cfg.label === "string" ? cfg.label : "اختيار السيارة";
 
-  // ============ 0) Firestore REST ============
-
-  const base =
+  /* ============ 0) Firestore REST ============ */
+  var base =
     "https://firestore.googleapis.com/v1/projects/" +
     projectId +
     "/databases/(default)/documents/meta";
-  const docUrl = function (name) {
+  var docUrl = function (name) {
     return base + "/" + name + "?key=" + apiKey;
   };
 
@@ -1124,18 +1108,18 @@ function buildAdvancedSearchButton(widget) {
   }
 
   async function getDoc(name) {
-    const r = await fetch(docUrl(name));
+    var r = await fetch(docUrl(name));
     if (!r.ok) throw new Error(name + ": " + r.status + " " + (await r.text()));
-    const j = await r.json();
+    var j = await r.json();
     return fromFsValue(j.fields && j.fields.value);
   }
 
-  // ============ 1) حاويات البيانات ============
+  /* ============ 1) حاويات البيانات ============ */
   var SECTION_TREE = {};
   var CATEGORIES = [];
 
   async function loadData() {
-    const tree = await getDoc(metaDoc);
+    var tree = await getDoc(metaDoc);
     SECTION_TREE = tree && typeof tree === "object" ? tree : {};
 
     var cats = [];
@@ -1196,20 +1180,26 @@ function buildAdvancedSearchButton(widget) {
     CATEGORIES = cats;
   }
 
-  // ============ 4) UI + منطق (نفس سكربت اختيار السيارة) ============
+  /* ============ 4) UI + منطق (نفس سكربت اختيار السيارة) ============ */
 
+  // زر الفتح — نترك الـ CSS يتحكم في position بالكامل
   var openBtn = document.createElement("button");
   openBtn.className = "popup-open-btn";
-  openBtn.textContent = buttonLabel;
-  document.body.appendChild(openBtn);
 
-  try {
-    openBtn.style.position = "fixed";
-    openBtn.style.zIndex = "2147483647";
-    openBtn.style.bottom = bottom + "px";
-    if (side === "right") openBtn.style.right = "18px";
-    else openBtn.style.left = "18px";
-  } catch (_) {}
+  if (buttonLabel && buttonLabel.trim()) {
+    // لو في نص → نعتمده
+    openBtn.textContent = buttonLabel;
+  } else {
+    // لو خليت label فاضي في config → يصير الزر أيقونة فقط
+    openBtn.innerHTML =
+      '<span class="popup-open-icon" aria-hidden="true">' +
+      '<svg viewBox="0 0 24 24" width="18" height="18">' +
+      '<path fill="currentColor" d="M4 5h16v2H4zm3 6h10v2H7zm3 6h4v2h-4z"></path>' +
+      "</svg>" +
+      "</span>";
+  }
+
+  document.body.appendChild(openBtn);
 
   var popup = document.createElement("div");
   popup.className = "fullpage-popup";
@@ -1526,7 +1516,7 @@ function buildAdvancedSearchButton(widget) {
       })
       .finally(function () {
         openBtn.disabled = false;
-        openBtn.textContent = loadingBtnText;
+        openBtn.textContent = buttonLabel || "اختيار السيارة";
       });
   };
 
@@ -1558,6 +1548,7 @@ function buildAdvancedSearchButton(widget) {
     if (e.target === popup) popup.classList.remove("active");
   };
 }
+
 
     // ========== تحميل مكتبة Choices (CSS + JS) ==========
     function ensureChoicesAssets() {
