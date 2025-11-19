@@ -1075,10 +1075,10 @@ function buildAdvancedSearchButton(widget) {
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
   var maxParts = Number(searchCfg.maxParts || 5);
-var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa")
-  .toString()
-  .replace(/^undefined/, "")
-  .replace(/\/+$/, "");
+var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
+  /\/+$/,
+  ""
+);
 
 
   // النص اللي يجي من config.label
