@@ -612,7 +612,6 @@ function buildGrandLaunchPopupDOM(widget) {
   overlay.style.backdropFilter = "blur(12px)";
   overlay.style.webkitBackdropFilter = "blur(12px)";
 
-  // توهج خفيف جدًا
   var glow = document.createElement("div");
   glow.style.position = "absolute";
   glow.style.inset = "0";
@@ -643,7 +642,6 @@ function buildGrandLaunchPopupDOM(widget) {
   innerBorder.style.pointerEvents = "none";
   box.appendChild(innerBorder);
 
-  // شريط خفيف جداً
   var stripe = document.createElement("div");
   stripe.style.position = "absolute";
   stripe.style.top = "-30px";
@@ -693,7 +691,7 @@ function buildGrandLaunchPopupDOM(widget) {
   };
   box.appendChild(closeBtn);
 
-  // ===== المحتوى: عمودين =====
+  // ===== المحتوى: عمودين (ديسكتوب) =====
   var contentWrap = document.createElement("div");
   contentWrap.style.position = "relative";
   contentWrap.style.zIndex = "1";
@@ -702,7 +700,7 @@ function buildGrandLaunchPopupDOM(widget) {
   contentWrap.style.gap = "16px";
   contentWrap.style.alignItems = "stretch";
 
-  // ================= العمود الأيسر – كرت الفورم =================
+  // ============ العمود الأيسر – كرت الفورم ============
   var leftCol = document.createElement("div");
   leftCol.style.display = "flex";
   leftCol.style.alignItems = "stretch";
@@ -821,7 +819,6 @@ function buildGrandLaunchPopupDOM(widget) {
     form.appendChild(r3.wrap);
   }
 
-  // ===== زر الإرسال – ستايل iOS هادي =====
   var submitBtn = document.createElement("button");
   submitBtn.type = "submit";
   submitBtn.textContent = submitLabel;
@@ -874,7 +871,7 @@ function buildGrandLaunchPopupDOM(widget) {
   formCard.appendChild(msg);
   leftCol.appendChild(formCard);
 
-  // ================= العمود الأيمن – النصوص =================
+  // ============ العمود الأيمن – النصوص ============
   var rightCol = document.createElement("div");
   rightCol.style.display = "flex";
   rightCol.style.flexDirection = "column";
@@ -971,22 +968,26 @@ function buildGrandLaunchPopupDOM(widget) {
   rightCol.appendChild(miniNote);
 
   // ===== ربط الأعمدة =====
-  contentWrap.appendChild(leftCol);
-  contentWrap.appendChild(rightCol);
+  contentWrap.appendChild(rightCol); // لاحظ: النص أول في الـ DOM
+  contentWrap.appendChild(leftCol);  // والفورم ثاني
   box.appendChild(contentWrap);
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 
-  // ===== موبايل: عمود واحد مرتب =====
+  // ===== موبايل: نص فوق + فورم تحت =====
   try {
     if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
-      contentWrap.style.gridTemplateColumns = "minmax(0,1fr)";
+      // نخليها فلكس عمودي ونضمن الترتيب: النص ثم الفورم
+      contentWrap.style.display = "flex";
+      contentWrap.style.flexDirection = "column";
       contentWrap.style.gap = "14px";
       box.style.width = "92vw";
       box.style.padding = "16px 14px 14px";
-      leftCol.style.order = "1";
-      rightCol.style.order = "2";
-      rightCol.style.marginTop = "4px";
+
+      // نتأكد إن rightCol فوق و leftCol تحت
+      contentWrap.innerHTML = "";
+      contentWrap.appendChild(rightCol); // نصوص
+      contentWrap.appendChild(leftCol);  // فورم
     }
   } catch (_) {}
 
@@ -1059,6 +1060,8 @@ function buildGrandLaunchPopupDOM(widget) {
 }
 
 
+
+
 // ================== ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
 function buildAdvancedSearchButton(widget) {
   var cfg = widget.config || {};
@@ -1072,10 +1075,11 @@ function buildAdvancedSearchButton(widget) {
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
   var maxParts = Number(searchCfg.maxParts || 5);
-  var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
-    /\/+$/,
-    ""
-  );
+var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa")
+  .toString()
+  .replace(/^undefined/, "")
+  .replace(/\/+$/, "");
+
 
   // النص اللي يجي من config.label
   var buttonLabel = typeof cfg.label === "string" ? cfg.label : "اختيار السيارة";
