@@ -1063,7 +1063,9 @@ function buildGrandLaunchPopupDOM(widget) {
 
 
 
-// ================== ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
+
+
+// =========== بوب اب للجوال ======= ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
 function buildAdvancedSearchButton(widget) {
   var cfg = widget.config || {};
   var firestore = cfg.firestore || {};
@@ -1075,15 +1077,11 @@ function buildAdvancedSearchButton(widget) {
     firestore.apiKey || "AIzaSyB0qGrqutUtkFHKnyy7F73kyiDfcQhsDc";
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
-var maxParts = Number(searchCfg.maxParts || 5);
-var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
-  /\/+$/,
-  ""
-);
-
-
-
-
+  var maxParts = Number(searchCfg.maxParts || 5);
+  var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
+    /\/+$/,
+    ""
+  );
 
   // النص اللي يجي من config.label
   var buttonLabel = typeof cfg.label === "string" ? cfg.label : "اختيار السيارة";
@@ -1556,6 +1554,18 @@ var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
     if (e.target === popup) popup.classList.remove("active");
   };
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     // ========== تحميل مكتبة Choices (CSS + JS) ==========
