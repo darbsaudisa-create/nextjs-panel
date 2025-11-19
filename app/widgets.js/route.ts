@@ -1063,16 +1063,11 @@ function buildAdvancedSearchButton(widget) {
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
   var maxParts = Number(searchCfg.maxParts || 5);
+var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
+  /\/+$/,
+  ""
+);
 
-  // ==== تنظيف الدومين لو فيه undefined بالغلط ====
-  var rawDomain = searchCfg.targetDomain;
-  if (!rawDomain || typeof rawDomain !== "string") {
-    rawDomain = "https://darb.com.sa";
-  }
-  // لو القيمة جاية بالشكل "undefinedhttps://darb.com.sa" نشيل undefined من البداية
-  rawDomain = rawDomain.replace(/^undefined/gi, "").trim();
-  // نشيل / الزايدة في النهاية
-  var targetDomain = rawDomain.replace(/\/+$/, "");
 
 
   // النص اللي يجي من config.label
