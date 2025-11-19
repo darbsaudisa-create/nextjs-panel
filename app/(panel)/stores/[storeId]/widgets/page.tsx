@@ -2,6 +2,7 @@
 
 import { supabaseServer } from "@/lib/supabaseServer";
 import Link from "next/link";
+import { revalidatePath } from "next/cache";
 
 type Store = {
   id: string;
@@ -58,6 +59,26 @@ function formatDate(value: string) {
     month: "2-digit",
     day: "2-digit",
   });
+}
+
+// ======= Server Action لتشغيل/إيقاف الودجت =======
+export async function toggleWidgetStatus(formData: FormData) {
+  "use server";
+
+  const widgetId = formData.get("widgetId") as string | null;
+  const storeId = formData.get("storeId") as string | null;
+  const currentStatus = formData.get("currentStatus") as string | null;
+
+  if (!widgetId || !storeId || !currentStatus) return;
+
+  const nextStatus = currentStatus === "active" ? "paused" : "active";
+
+  await supabaseServer
+    .from("widgets")
+    .update({ status: nextStatus })
+    .eq("id", widgetId);
+
+  revalidatePath(`/stores/${storeId}/widgets`);
 }
 
 // Next.js 16: params هو Promise
@@ -128,7 +149,8 @@ export default async function StoreWidgetsPage({
           )}
           <p className="text-[11px] text-gray-500">
             هذه الصفحة تعرض الودجت المرتبطة بهذا المتجر (kind + status +
-            placement). لاحقًا نضيف أزرار تفعيل/تعطيل وإعدادات لكل Widget.
+            placement) مع إمكانية تشغيل/إيقاف كل Widget، والوصول لصفحة تعديل
+            الإعدادات.
           </p>
         </div>
 
@@ -167,34 +189,85 @@ export default async function StoreWidgetsPage({
                   <th className="px-3 py-2 text-right font-medium">
                     تاريخ الإضافة
                   </th>
+                  <th className="px-3 py-2 text-right font-medium">
+                    الإجراءات
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {widgets.map((w) => (
-                  <tr
-                    key={w.id}
-                    className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/60"
-                  >
-                    <td className="px-3 py-2 whitespace-nowrap">{w.name}</td>
-                    <td className="px-3 py-2 whitespace-nowrap">{w.slug}</td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[11px]">
-                        {w.kind}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[11px]">
-                        {w.status}
-                      </span>
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      {w.placement || "—"}
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">
-                      {formatDate(w.created_at)}
-                    </td>
-                  </tr>
-                ))}
+                {widgets.map((w) => {
+                  const isActive = w.status === "active";
+                  const isAdvancedCarPicker =
+                    w.kind === "filter_bar" && w.slug === "advanced-car-picker";
+
+                  return (
+                    <tr
+                      key={w.id}
+                      className="border-b border-slate-100 last:border-b-0 hover:bg-slate-50/60"
+                    >
+                      <td className="px-3 py-2 whitespace-nowrap">{w.name}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">{w.slug}</td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-[11px]">
+                          {w.kind}
+                        </span>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        <form
+                          action={toggleWidgetStatus}
+                          className="inline-flex items-center gap-2"
+                        >
+                          <input type="hidden" name="widgetId" value={w.id} />
+                          <input
+                            type="hidden"
+                            name="storeId"
+                            value={store.id}
+                          />
+                          <input
+                            type="hidden"
+                            name="currentStatus"
+                            value={w.status}
+                          />
+                          <span
+                            className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] ${
+                              isActive
+                                ? "bg-emerald-50 text-emerald-700 border border-emerald-100"
+                                : "bg-slate-100 text-slate-700 border border-slate-200"
+                            }`}
+                          >
+                            {isActive ? "active" : "paused"}
+                          </span>
+                          <button
+                            type="submit"
+                            className="inline-flex items-center rounded-full border px-2 py-0.5 text-[11px] hover:bg-slate-900 hover:text-white transition"
+                          >
+                            {isActive ? "إيقاف" : "تشغيل"}
+                          </button>
+                        </form>
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {w.placement || "—"}
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {formatDate(w.created_at)}
+                      </td>
+                      <td className="px-3 py-2 whitespace-nowrap">
+                        {isAdvancedCarPicker ? (
+                          <Link
+                            href={`/stores/${store.id}/widgets/${w.id}`}
+                            className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 hover:bg-slate-100"
+                          >
+                            تعديل إعدادات البحث المتقدم
+                          </Link>
+                        ) : (
+                          <span className="text-[10px] text-slate-400">
+                            لا يوجد نموذج تعديل مخصص
+                          </span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

@@ -140,541 +140,156 @@ export async function GET(_req: NextRequest) {
       if (!legacy || legacy === "all_pages") return true;
       return true;
     }
-// ============= STYLE VARIANTS FOR SALE POPUP الوان البوب اب ـــــــــ=============
-function applyClassicStyle(box, content) {
-  // أبيض نظيف ستايل iOS light
-  box.style.background = "rgba(248,250,252,0.98)";
-  box.style.borderRadius = "26px";
-  box.style.boxShadow =
-    "0 26px 70px rgba(15,23,42,0.20), 0 0 0 1px rgba(226,232,240,0.9)";
-  box.style.border = "1px solid rgba(226,232,240,0.9)";
-  box.style.backdropFilter = "blur(22px)";
-  content.style.textAlign = "center";
-  content.style.color = "#020617";
-}
 
-function applyLuxuryStyle(box, content) {
-  // دارك فاخر – قريب من Apple Music / Wallet
-  box.style.background =
-    "radial-gradient(circle at top, #020617, #020617 40%, #020617)";
-  box.style.borderRadius = "28px";
-  box.style.boxShadow =
-    "0 32px 100px rgba(15,23,42,0.98), 0 0 0 1px rgba(31,41,55,0.95)";
-  box.style.border = "1px solid rgba(51,65,85,0.95)";
-  box.style.backdropFilter = "blur(28px)";
-  content.style.textAlign = "center";
-  content.style.color = "#e5e7eb";
-}
+    // ============= STYLE VARIANTS FOR SALE POPUP =============
+    function applyClassicStyle(box, content) {
+      // أبيض نظيف ستايل iOS light
+      box.style.background = "rgba(248,250,252,0.98)";
+      box.style.borderRadius = box.style.borderRadius || "26px";
+      box.style.boxShadow =
+        "0 26px 70px rgba(15,23,42,0.20), 0 0 0 1px rgba(226,232,240,0.9)";
+      box.style.border = "1px solid rgba(226,232,240,0.9)";
+      box.style.backdropFilter = "blur(22px)";
+      content.style.textAlign = "center";
+      content.style.color = "#020617";
+    }
 
-function applyPremiumStyle(box, content) {
-  // فاتح راقي – كرت إعدادات / Apple Pay
-  box.style.background =
-    "linear-gradient(145deg, #ffffff, #f9fafb 45%, #eef2ff)";
-  box.style.borderRadius = "26px";
-  box.style.boxShadow =
-    "0 24px 65px rgba(15,23,42,0.18), 0 0 0 1px rgba(229,231,235,0.95)";
-  box.style.border = "1px solid rgba(229,231,235,0.95)";
-  box.style.backdropFilter = "blur(18px)";
-  content.style.textAlign = "left";
-  content.style.color = "#020617";
-}
+    function applyLuxuryStyle(box, content) {
+      // دارك فاخر – قريب من Apple Music / Wallet
+      box.style.background =
+        "radial-gradient(circle at top, #020617, #020617 40%, #020617)";
+      box.style.borderRadius = box.style.borderRadius || "28px";
+      box.style.boxShadow =
+        "0 32px 100px rgba(15,23,42,0.98), 0 0 0 1px rgba(31,41,55,0.95)";
+      box.style.border = "1px solid rgba(51,65,85,0.95)";
+      box.style.backdropFilter = "blur(28px)";
+      content.style.textAlign = "center";
+      content.style.color = "#e5e7eb";
+    }
 
-function applyGenZStyle(box, content) {
-  // Gen Z رايق – لمعة خفيفة حوالين الحواف بدون حفلة ألوان
-  box.style.background =
-    "radial-gradient(circle at top left, rgba(59,130,246,0.24), transparent 55%)," +
-    "radial-gradient(circle at bottom right, rgba(244,114,182,0.24), transparent 55%)," +
-    "linear-gradient(145deg, #020617, #020617 50%, #020617)";
-  box.style.borderRadius = "28px";
-  box.style.boxShadow =
-    "0 32px 110px rgba(15,23,42,0.98), 0 0 0 1px rgba(30,64,175,0.6)";
-  box.style.border = "1px solid rgba(30,64,175,0.6)";
-  box.style.backdropFilter = "blur(28px)";
-  content.style.textAlign = "center";
-  content.style.color = "#e5e7eb";
-}
+    function applyPremiumStyle(box, content) {
+      // فاتح راقي – كرت إعدادات / Apple Pay
+      box.style.background =
+        "linear-gradient(145deg, #ffffff, #f9fafb 45%, #eef2ff)";
+      box.style.borderRadius = box.style.borderRadius || "26px";
+      box.style.boxShadow =
+        "0 24px 65px rgba(15,23,42,0.18), 0 0 0 1px rgba(229,231,235,0.95)";
+      box.style.border = "1px solid rgba(229,231,235,0.95)";
+      box.style.backdropFilter = "blur(18px)";
+      content.style.textAlign = "left";
+      content.style.color = "#020617";
+    }
 
+    function applyGenZStyle(box, content) {
+      // Gen Z رايق – لمعة خفيفة حوالين الحواف بدون حفلة ألوان
+      box.style.background =
+        "radial-gradient(circle at top left, rgba(59,130,246,0.24), transparent 55%)," +
+        "radial-gradient(circle at bottom right, rgba(244,114,182,0.24), transparent 55%)," +
+        "linear-gradient(145deg, #020617, #020617 50%, #020617)";
+      box.style.borderRadius = box.style.borderRadius || "28px";
+      box.style.boxShadow =
+        "0 32px 110px rgba(15,23,42,0.98), 0 0 0 1px rgba(30,64,175,0.6)";
+      box.style.border = "1px solid rgba(30,64,175,0.6)";
+      box.style.backdropFilter = "blur(28px)";
+      content.style.textAlign = "center";
+      content.style.color = "#e5e7eb";
+    }
 
-// ================== تنسيق البوب اب ــــ==================
-// ================== SALE POPUP ==================
-function buildSalePopupDOM(widget) {
-  var cfg = widget.config || {};
-  var styleVariant = cfg.style || "classic";
-
-  var heading = cfg.heading || "";
-  var body = cfg.body || "";
-  var buttonLabel = cfg.buttonLabel || "";
-  var buttonUrl = cfg.buttonUrl || "#";
-  var buttonColor = cfg.buttonColor || "#DC2626";
-  var imageUrl = cfg.imageUrl || "";
-  var couponCfg = cfg.coupon || {};
-  var counterCfg = cfg.counter || {};
-  var headingBlock = cfg.headingBlock || { enabled: true };
-  var bodyBlock = cfg.bodyBlock || { enabled: true };
-  var imageBlock = cfg.imageBlock || { enabled: true };
-  var buttonBlock = cfg.buttonBlock || { enabled: true };
-
-  // خلفية التعتيم
-  var overlay = document.createElement("div");
-  overlay.setAttribute("data-widgets-popup-id", widget.id);
-  overlay.style.position = "fixed";
-  overlay.style.inset = "0";
-  overlay.style.background =
-    "radial-gradient(circle at top,rgba(15,23,42,0.75),rgba(15,23,42,0.95))";
-  overlay.style.zIndex = "999999";
-  overlay.style.display = "flex";
-  overlay.style.alignItems = "center";
-  overlay.style.justifyContent = "center";
-  overlay.style.padding = "16px";
-  overlay.style.backdropFilter = "blur(12px)";
-
-  // البوكس (الأساس، الستايل النهائي يطبّق من applyXStyle)
-  var box = document.createElement("div");
-  box.style.width = "min(90vw, 520px)";
-  box.style.position = "relative";
-  box.style.fontFamily =
-    "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
-  box.style.overflow = "hidden";
-  box.style.borderRadius = "26px";
-  box.style.border = "1px solid rgba(148,163,184,0.35)";
-  box.style.boxShadow =
-    "0 28px 80px rgba(15,23,42,0.75)";
-  box.style.color = "#e5e7eb";
-  box.style.backdropFilter = "blur(22px)";
-  box.style.transform = "translateY(0)";
-  box.style.transition =
-    "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out";
-  box.style.opacity = "1";
-
-  // زر الإغلاق – ستايل iOS
-  var closeBtn = document.createElement("button");
-  closeBtn.innerHTML = "&times;";
-  closeBtn.style.position = "absolute";
-  closeBtn.style.top = "14px";
-  closeBtn.style.left = "14px";
-  closeBtn.style.width = "30px";
-  closeBtn.style.height = "30px";
-  closeBtn.style.borderRadius = "999px";
-  closeBtn.style.border = "1px solid rgba(148,163,184,0.35)";
-  closeBtn.style.background = "rgba(15,23,42,0.6)";
-  closeBtn.style.backdropFilter = "blur(10px)";
-  closeBtn.style.cursor = "pointer";
-  closeBtn.style.fontSize = "18px";
-  closeBtn.style.lineHeight = "28px";
-  closeBtn.style.color = "#e5e7eb";
-  closeBtn.style.zIndex = "2";
-  closeBtn.style.display = "flex";
-  closeBtn.style.alignItems = "center";
-  closeBtn.style.justifyContent = "center";
-  closeBtn.style.transition =
-    "background 160ms ease-out, transform 160ms ease-out, box-shadow 160ms ease-out";
-
-  closeBtn.onmouseenter = function () {
-    closeBtn.style.background = "rgba(15,23,42,0.9)";
-    closeBtn.style.transform = "translateY(-1px)";
-    closeBtn.style.boxShadow = "0 10px 20px rgba(15,23,42,0.75)";
-  };
-  closeBtn.onmouseleave = function () {
-    closeBtn.style.background = "rgba(15,23,42,0.6)";
-    closeBtn.style.transform = "translateY(0)";
-    closeBtn.style.boxShadow = "none";
-  };
-
-  closeBtn.onclick = function () {
-    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
-    sendEvent(widget, "close");
-  };
-
-  box.appendChild(closeBtn);
-
-  // صورة علوية (لو موجودة)
-  if (imageBlock.enabled && imageUrl) {
-    var imgWrap = document.createElement("div");
-    imgWrap.style.height = "210px";
-    imgWrap.style.overflow = "hidden";
-    imgWrap.style.position = "relative";
-    imgWrap.style.borderRadius = "24px 24px 0 0";
-    var img = document.createElement("img");
-    img.src = imageUrl;
-    img.alt = heading || "";
-    img.style.width = "100%";
-    img.style.height = "100%";
-    img.style.objectFit = "cover";
-    img.style.display = "block";
-    imgWrap.appendChild(img);
-    box.appendChild(imgWrap);
-  }
-
-  // محتوى داخلي
-  var content = document.createElement("div");
-  content.style.padding = "20px 22px 18px";
-  content.style.position = "relative";
-
-  // تطبيق الستايل المختار
-  if (styleVariant === "classic") {
-    applyClassicStyle(box, content);
-  } else if (styleVariant === "luxury") {
-    applyLuxuryStyle(box, content);
-  } else if (styleVariant === "premium") {
-    applyPremiumStyle(box, content);
-  } else if (styleVariant === "genz") {
-    applyGenZStyle(box, content);
-  } else {
-    applyClassicStyle(box, content);
-  }
-
-  // نحدد ألوان النصوص حسب الستايل (عشان ما يطلع أبيض على أبيض)
-  var isDarkStyle = styleVariant === "luxury" || styleVariant === "genz";
-  var headingColor = isDarkStyle ? "#f9fafb" : "#020617";
-  var bodyColor = isDarkStyle ? "rgba(148,163,184,0.96)" : "rgba(55,65,81,0.96)";
-
-  // عنوان
-  if (headingBlock.enabled && heading) {
-    var h = document.createElement("h2");
-    h.textContent = heading;
-    h.style.fontSize = "20px";
-    h.style.fontWeight = "800";
-    h.style.margin = "0 0 8px";
-    h.style.letterSpacing = "0.01em";
-    h.style.color = headingColor;
-    h.style.lineHeight = "1.35";
-    content.appendChild(h);
-  }
-
-  // وصف
-  if (bodyBlock.enabled && body) {
-    var p = document.createElement("p");
-    p.textContent = body;
-    p.style.fontSize = "14px";
-    p.style.margin = "0 0 16px";
-    p.style.color = bodyColor;
-    p.style.lineHeight = "1.7";
-    content.appendChild(p);
-  }
-
-  // كاونتر (عدد العملاء/المنتجات)
-  if (counterCfg.enabled && counterCfg.target != null) {
-    var counterWrap = document.createElement("div");
-    counterWrap.style.marginBottom = "14px";
-    counterWrap.style.display = "flex";
-    counterWrap.style.alignItems = "center";
-    counterWrap.style.justifyContent = "space-between";
-    counterWrap.style.gap = "10px";
-
-    var counterLeft = document.createElement("div");
-    var counterLabel = document.createElement("div");
-    counterLabel.textContent = counterCfg.label || "عملاء وثقوا بنا";
-    counterLabel.style.fontSize = "11px";
-    counterLabel.style.textTransform = "uppercase";
-    counterLabel.style.letterSpacing = "0.09em";
-    counterLabel.style.color = isDarkStyle
-      ? "rgba(148,163,184,0.9)"
-      : "rgba(100,116,139,0.95)";
-    counterLabel.style.marginBottom = "2px";
-
-    var counterSpan = document.createElement("div");
-    counterSpan.style.fontSize = "24px";
-    counterSpan.style.fontWeight = "800";
-    counterSpan.style.letterSpacing = "0.03em";
-    counterSpan.style.fontVariantNumeric = "tabular-nums";
-    counterSpan.textContent = "0";
-    counterSpan.style.color = headingColor;
-
-    counterLeft.appendChild(counterLabel);
-    counterLeft.appendChild(counterSpan);
-    counterWrap.appendChild(counterLeft);
-
-    var chip = document.createElement("div");
-    chip.textContent = "عرض محدود";
-    chip.style.fontSize = "11px";
-    chip.style.padding = "4px 10px";
-    chip.style.borderRadius = "999px";
-    chip.style.background = isDarkStyle
-      ? "rgba(15,23,42,0.85)"
-      : "rgba(241,245,249,0.95)";
-    chip.style.border = isDarkStyle
-      ? "1px solid rgba(148,163,184,0.6)"
-      : "1px solid rgba(148,163,184,0.5)";
-    chip.style.textTransform = "uppercase";
-    chip.style.letterSpacing = "0.09em";
-    chip.style.color = isDarkStyle ? "#e5e7eb" : "#111827";
-
-    counterWrap.appendChild(chip);
-    content.appendChild(counterWrap);
-
-    var targetVal = Number(counterCfg.target || 0);
-    (function animateCounter(el, to, duration) {
-      var start = 0;
-      var startTime = Date.now();
-      function tick() {
-        var now = Date.now();
-        var progress = Math.min(1, (now - startTime) / (duration || 1500));
-        var eased =
-          progress < 0.5
-            ? 2 * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-        var val = Math.floor(start + (to - start) * eased);
-        el.textContent = val.toLocaleString("en-US");
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })(counterSpan, targetVal, 1500);
-  }
-
-  // زر CTA
-  if (buttonBlock.enabled && buttonLabel) {
-    var btn = document.createElement("a");
-    btn.textContent = buttonLabel;
-    btn.href = buttonUrl || "#";
-    btn.style.display = "inline-flex";
-    btn.style.alignItems = "center";
-    btn.style.justifyContent = "center";
-    btn.style.fontSize = "14px";
-    btn.style.fontWeight = "700";
-    btn.style.borderRadius = "999px";
-    btn.style.padding = "11px 24px";
-    btn.style.textDecoration = "none";
-    btn.style.background = buttonColor || "#f97316";
-    btn.style.backgroundImage =
-      "linear-gradient(135deg, rgba(255,255,255,0.65), transparent)";
-    btn.style.boxShadow = isDarkStyle
-      ? "0 18px 45px rgba(15,23,42,0.85)"
-      : "0 18px 40px rgba(15,23,42,0.25)";
-    btn.style.marginTop = "4px";
-    btn.style.border = "1px solid rgba(15,23,42,0.12)";
-    btn.style.transition =
-      "transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease-out, filter 160ms ease-out";
-    btn.style.fontVariantNumeric = "tabular-nums";
-    btn.style.color = isDarkStyle ? "#f9fafb" : "#020617";
-
-    btn.onmouseenter = function () {
-      btn.style.transform = "translateY(-1.5px)";
-      btn.style.boxShadow = isDarkStyle
-        ? "0 24px 55px rgba(15,23,42,0.95)"
-        : "0 22px 50px rgba(15,23,42,0.28)";
-      btn.style.filter = "brightness(1.03)";
-    };
-    btn.onmouseleave = function () {
-      btn.style.transform = "translateY(0)";
-      btn.style.boxShadow = isDarkStyle
-        ? "0 18px 45px rgba(15,23,42,0.85)"
-        : "0 18px 40px rgba(15,23,42,0.25)";
-      btn.style.filter = "none";
-    };
-
-    btn.onclick = function (e) {
-      sendEvent(widget, "click", { href: buttonUrl });
-      if (!buttonUrl || buttonUrl === "#") {
-        e.preventDefault();
-      }
-    };
-    content.appendChild(btn);
-  }
-
-  // كوبون
-  if (couponCfg.enabled && couponCfg.code) {
-    var couponWrap = document.createElement("div");
-    couponWrap.style.marginTop = "14px";
-    couponWrap.style.display = "flex";
-    couponWrap.style.justifyContent = "space-between";
-    couponWrap.style.alignItems = "center";
-    couponWrap.style.padding = "10px 12px";
-    couponWrap.style.borderRadius = "16px";
-    couponWrap.style.background = isDarkStyle
-      ? "rgba(15,23,42,0.9)"
-      : "rgba(241,245,249,0.98)";
-    couponWrap.style.border = "1px dashed rgba(148,163,184,0.7)";
-    couponWrap.style.gap = "10px";
-
-    var couponLabel = document.createElement("span");
-    couponLabel.textContent = "استخدم كود الخصم:";
-    couponLabel.style.fontSize = "12px";
-    couponLabel.style.color = isDarkStyle
-      ? "rgba(148,163,184,0.96)"
-      : "rgba(100,116,139,0.98)";
-
-    var couponCode = document.createElement("span");
-    couponCode.textContent = couponCfg.code;
-    couponCode.style.fontFamily =
-      "SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
-    couponCode.style.fontSize = "13px";
-    couponCode.style.fontWeight = "700";
-    couponCode.style.padding = "6px 10px";
-    couponCode.style.borderRadius = "999px";
-    couponCode.style.background = isDarkStyle ? "#f9fafb" : "#020617";
-    couponCode.style.color = isDarkStyle ? "#020617" : "#f9fafb";
-
-    var rightPart = document.createElement("div");
-    rightPart.style.display = "flex";
-    rightPart.style.alignItems = "center";
-    rightPart.style.gap = "8px";
-
-    rightPart.appendChild(couponCode);
-
-    var copyBtn = document.createElement("button");
-    copyBtn.type = "button";
-    copyBtn.textContent = "نسخ";
-    copyBtn.style.border = "none";
-    copyBtn.style.borderRadius = "999px";
-    copyBtn.style.padding = "6px 12px";
-    copyBtn.style.fontSize = "11px";
-    copyBtn.style.fontWeight = "600";
-    copyBtn.style.cursor = "pointer";
-    copyBtn.style.background = isDarkStyle
-      ? "rgba(15,23,42,0.9)"
-      : "rgba(15,23,42,0.95)";
-    copyBtn.style.color = "#f9fafb";
-    copyBtn.style.transition =
-      "background 140ms ease-out, transform 140ms ease-out, box-shadow 140ms ease-out";
-
-    copyBtn.onmouseenter = function () {
-      copyBtn.style.background = "#020617";
-      copyBtn.style.transform = "translateY(-0.5px)";
-      copyBtn.style.boxShadow = "0 10px 20px rgba(15,23,42,0.75)";
-    };
-    copyBtn.onmouseleave = function () {
-      copyBtn.style.background = isDarkStyle
-        ? "rgba(15,23,42,0.9)"
-        : "rgba(15,23,42,0.95)";
-      copyBtn.style.transform = "translateY(0)";
-      copyBtn.style.boxShadow = "none";
-    };
-
-    copyBtn.onclick = function () {
-      var code = couponCfg.code || "";
-      if (!code) return;
-
-      var done = false;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard
-          .writeText(code)
-          .then(function () {
-            done = true;
-          })
-          .catch(function () {});
-      }
-      if (!done) {
-        try {
-          var temp = document.createElement("textarea");
-          temp.value = code;
-          temp.style.position = "fixed";
-          temp.style.opacity = "0";
-          document.body.appendChild(temp);
-          temp.focus();
-          temp.select();
-          document.execCommand("copy");
-          document.body.removeChild(temp);
-        } catch (e) {}
-      }
-
-      copyBtn.textContent = "تم النسخ ✅";
-      setTimeout(function () {
-        copyBtn.textContent = "نسخ";
-      }, 1800);
-    };
-
-    couponWrap.appendChild(couponLabel);
-    couponWrap.appendChild(rightPart);
-    rightPart.appendChild(copyBtn);
-
-    content.appendChild(couponWrap);
-  }
-
-  box.appendChild(content);
-  overlay.appendChild(box);
-  document.body.appendChild(overlay);
-}
-
-
-
-
-
-
-    // ================== GRAND LAUNCH POPUP (FORM) ==================
-    function buildGrandLaunchPopupDOM(widget) {
+    // ================== SALE POPUP ==================
+    function buildSalePopupDOM(widget) {
       var cfg = widget.config || {};
-      var badgeText = cfg.badgeText || "افتتاح ضخم";
-      var titleText =
-        cfg.titleText || "انتظرونا… سيتم افتتاح المتجر قريبًا";
-      var subText =
-        cfg.subText ||
-        "نجهّز تجربة تسوّق مختلفة، بأسعار قوية وخدمة أسرع.";
-      var buttonText = cfg.buttonText || "نبّهني عند الافتتاح";
-      var targetCount = cfg.targetCount || 0;
-      var formCfg = cfg.form || {};
-      var nameField = formCfg.name || { enabled: true, required: true };
-      var phoneField = formCfg.phone || { enabled: true, required: true };
-      var emailField = formCfg.email || { enabled: false, required: false };
-      var submitLabel = formCfg.submitLabel || "إرسال البيانات";
+      var styleVariant = cfg.style || "classic";
 
+      var heading = cfg.heading || "";
+      var body = cfg.body || "";
+      var buttonLabel = cfg.buttonLabel || "";
+      var buttonUrl = cfg.buttonUrl || "#";
+      var buttonColor = cfg.buttonColor || "#DC2626";
+      var imageUrl = cfg.imageUrl || "";
+      var couponCfg = cfg.coupon || {};
+      var counterCfg = cfg.counter || {};
+      var headingBlock = cfg.headingBlock || { enabled: true };
+      var bodyBlock = cfg.bodyBlock || { enabled: true };
+      var imageBlock = cfg.imageBlock || { enabled: true };
+      var buttonBlock = cfg.buttonBlock || { enabled: true };
+
+      // خلفية التعتيم
       var overlay = document.createElement("div");
+      overlay.setAttribute("data-widgets-popup-id", widget.id);
       overlay.style.position = "fixed";
       overlay.style.inset = "0";
+      overlay.style.background =
+        "radial-gradient(circle at top,rgba(15,23,42,0.75),rgba(15,23,42,0.95))";
       overlay.style.zIndex = "999999";
       overlay.style.display = "flex";
       overlay.style.alignItems = "center";
       overlay.style.justifyContent = "center";
-      overlay.style.background =
-        "radial-gradient(circle at top,#020617,#020617 45%,#000000 100%)";
+      overlay.style.padding = "16px";
+      overlay.style.backdropFilter = "blur(12px)";
 
-      var glow = document.createElement("div");
-      glow.style.position = "absolute";
-      glow.style.inset = "0";
-      glow.style.pointerEvents = "none";
-      glow.style.background =
-        "radial-gradient(circle at top,#facc1533,#f9731633,transparent 60%)";
-      overlay.appendChild(glow);
+      // تحديد هل الجهاز جوال
+      var isMobile =
+        (window.innerWidth || document.documentElement.clientWidth || 0) <= 640;
 
+      // البوكس الأساسي
       var box = document.createElement("div");
-      box.style.width = "min(96vw, 760px)";
-      box.style.background =
-        "linear-gradient(145deg,#020617,#020617 40%,#111827 75%,#020617)";
-      box.style.borderRadius = "28px";
+      box.style.width = isMobile ? "100vw" : "min(90vw, 520px)";
       box.style.position = "relative";
-      box.style.color = "#e5e7eb";
-      box.style.padding = "22px 20px 20px";
-      box.style.boxShadow =
-        "0 40px 120px rgba(0,0,0,0.95), 0 0 0 1px rgba(148,163,184,0.4)";
       box.style.fontFamily =
-        "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+        "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
       box.style.overflow = "hidden";
+      box.style.borderRadius = isMobile ? "0" : "26px";
+      box.style.border = "1px solid rgba(148,163,184,0.35)";
+      box.style.boxShadow = "0 28px 80px rgba(15,23,42,0.75)";
+      box.style.backdropFilter = "blur(22px)";
+      box.style.transform = "translateY(0)";
+      box.style.transition =
+        "transform 220ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out";
+      box.style.opacity = "1";
+      box.style.color = "#e5e7eb";
 
-      var innerBorder = document.createElement("div");
-      innerBorder.style.position = "absolute";
-      innerBorder.style.inset = "1px";
-      innerBorder.style.borderRadius = "26px";
-      innerBorder.style.border =
-        "1px solid rgba(250,204,21,0.45)";
-      innerBorder.style.pointerEvents = "none";
-      box.appendChild(innerBorder);
+      if (isMobile) {
+        box.style.height = "100vh";
+        box.style.maxHeight = "100vh";
+        box.style.display = "flex";
+        box.style.flexDirection = "column";
+        overlay.style.padding = "0";
+      }
 
-      var stripe = document.createElement("div");
-      stripe.style.position = "absolute";
-      stripe.style.top = "0";
-      stripe.style.left = "-20%";
-      stripe.style.width = "60%";
-      stripe.style.height = "120px";
-      stripe.style.background =
-        "linear-gradient(115deg,transparent,rgba(250,204,21,0.22),transparent)";
-      stripe.style.transform = "translateY(0)";
-      stripe.style.pointerEvents = "none";
-      box.appendChild(stripe);
-
+      // زر الإغلاق
       var closeBtn = document.createElement("button");
       closeBtn.innerHTML = "&times;";
       closeBtn.style.position = "absolute";
-      closeBtn.style.top = "12px";
-      closeBtn.style.left = "12px";
-      closeBtn.style.width = "32px";
-      closeBtn.style.height = "32px";
+      closeBtn.style.top = "14px";
+      closeBtn.style.left = "14px";
+      closeBtn.style.width = "30px";
+      closeBtn.style.height = "30px";
       closeBtn.style.borderRadius = "999px";
-      closeBtn.style.border = "1px solid rgba(148,163,184,.5)";
-      closeBtn.style.background = "rgba(15,23,42,.85)";
-      closeBtn.style.color = "#e5e7eb";
+      closeBtn.style.border = "1px solid rgba(148,163,184,0.35)";
+      closeBtn.style.background = "rgba(15,23,42,0.6)";
+      closeBtn.style.backdropFilter = "blur(10px)";
       closeBtn.style.cursor = "pointer";
       closeBtn.style.fontSize = "18px";
-      closeBtn.style.lineHeight = "30px";
+      closeBtn.style.lineHeight = "28px";
+      closeBtn.style.color = "#e5e7eb";
       closeBtn.style.zIndex = "2";
+      closeBtn.style.display = "flex";
+      closeBtn.style.alignItems = "center";
+      closeBtn.style.justifyContent = "center";
+      closeBtn.style.transition =
+        "background 160ms ease-out, transform 160ms ease-out, box-shadow 160ms ease-out";
+
+      closeBtn.onmouseenter = function () {
+        closeBtn.style.background = "rgba(15,23,42,0.9)";
+        closeBtn.style.transform = "translateY(-1px)";
+        closeBtn.style.boxShadow = "0 10px 20px rgba(15,23,42,0.75)";
+      };
+      closeBtn.onmouseleave = function () {
+        closeBtn.style.background = "rgba(15,23,42,0.6)";
+        closeBtn.style.transform = "translateY(0)";
+        closeBtn.style.boxShadow = "none";
+      };
+
       closeBtn.onclick = function () {
         if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
         sendEvent(widget, "close");
@@ -682,271 +297,742 @@ function buildSalePopupDOM(widget) {
 
       box.appendChild(closeBtn);
 
-      var contentWrap = document.createElement("div");
-      contentWrap.style.position = "relative";
-      contentWrap.style.zIndex = "1";
-      contentWrap.style.display = "grid";
-      contentWrap.style.gridTemplateColumns = "minmax(0,2fr) minmax(0,1.4fr)";
-      contentWrap.style.gap = "18px";
-      contentWrap.style.alignItems = "flex-start";
+      // صورة علوية (لو موجودة)
+      if (imageBlock.enabled && imageUrl) {
+        var imgWrap = document.createElement("div");
+        imgWrap.style.height = "210px";
+        imgWrap.style.overflow = "hidden";
+        imgWrap.style.position = "relative";
+        imgWrap.style.borderRadius = isMobile ? "0" : "24px 24px 0 0";
+        var img = document.createElement("img");
+        img.src = imageUrl;
+        img.alt = heading || "";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        img.style.display = "block";
+        imgWrap.appendChild(img);
+        box.appendChild(imgWrap);
+      }
 
-      var leftCol = document.createElement("div");
+      // محتوى داخلي
+      var content = document.createElement("div");
+      content.style.padding = "20px 24px 20px";
+      content.style.position = "relative";
+      if (isMobile) {
+        content.style.flex = "1 1 auto";
+        content.style.overflowY = "auto";
+      }
 
-      var badge = document.createElement("div");
-      badge.textContent = badgeText;
-      badge.style.display = "inline-flex";
-      badge.style.alignItems = "center";
-      badge.style.padding = "6px 14px";
-      badge.style.borderRadius = "999px";
-      badge.style.fontSize = "11px";
-      badge.style.fontWeight = "800";
-      badge.style.background =
-        "linear-gradient(90deg,#facc15,#f97316,#facc15)";
-      badge.style.color = "#1f2933";
-      badge.style.boxShadow =
-        "0 0 30px rgba(234,179,8,0.55), 0 0 0 1px rgba(161,98,7,0.85)";
-      badge.style.letterSpacing = "0.08em";
-      badge.style.textTransform = "uppercase";
-      leftCol.appendChild(badge);
+      // تطبيق الستايل المختار
+      if (styleVariant === "classic") {
+        applyClassicStyle(box, content);
+      } else if (styleVariant === "luxury") {
+        applyLuxuryStyle(box, content);
+      } else if (styleVariant === "premium") {
+        applyPremiumStyle(box, content);
+      } else if (styleVariant === "genz") {
+        applyGenZStyle(box, content);
+      } else {
+        applyClassicStyle(box, content);
+      }
 
-      var title = document.createElement("h2");
-      title.textContent = titleText;
-      title.style.marginTop = "12px";
-      title.style.fontSize = "24px";
-      title.style.fontWeight = "900";
-      title.style.letterSpacing = "0.02em";
-      title.style.color = "#f9fafb";
-      leftCol.appendChild(title);
+      // تحديد هل الستايل داكن أو فاتح، عشان الألوان
+      var isDarkStyle = styleVariant === "luxury" || styleVariant === "genz";
+      var headingColor = isDarkStyle ? "#f9fafb" : "#020617";
+      var bodyColor = isDarkStyle
+        ? "rgba(148,163,184,0.96)"
+        : "rgba(55,65,81,0.96)";
 
-      var sub = document.createElement("p");
-      sub.textContent = subText;
-      sub.style.marginTop = "6px";
-      sub.style.fontSize = "13px";
-      sub.style.color = "#cbd5f5";
-      sub.style.maxWidth = "420px";
-      leftCol.appendChild(sub);
+      // عنوان العرض
+      if (headingBlock.enabled && heading) {
+        var h = document.createElement("h2");
+        h.textContent = heading;
+        h.style.fontSize = "20px";
+        h.style.fontWeight = "800";
+        h.style.margin = "0 0 6px";
+        h.style.letterSpacing = "0.01em";
+        h.style.color = headingColor;
+        h.style.lineHeight = "1.4";
+        content.appendChild(h);
+      }
 
-      var countWrap = document.createElement("div");
-      countWrap.style.marginTop = "16px";
-      countWrap.style.display = "flex";
-      countWrap.style.alignItems = "baseline";
-      countWrap.style.gap = "10px";
+      // وصف العرض
+      if (bodyBlock.enabled && body) {
+        var p = document.createElement("p");
+        p.textContent = body;
+        p.style.fontSize = "14px";
+        p.style.margin = "0 0 16px";
+        p.style.color = bodyColor;
+        p.style.lineHeight = "1.7";
+        content.appendChild(p);
+      }
 
-      var countSpan = document.createElement("div");
-      countSpan.style.fontSize = "30px";
-      countSpan.style.fontWeight = "900";
-      countSpan.style.fontVariantNumeric = "tabular-nums";
-      countSpan.style.color = "#feeaa5";
-      countSpan.textContent = "0";
+      // كاونتر (عدد العملاء/المنتجات)
+      if (counterCfg.enabled && counterCfg.target != null) {
+        var counterWrap = document.createElement("div");
+        counterWrap.style.marginBottom = "18px";
+        counterWrap.style.display = "flex";
+        counterWrap.style.alignItems = "flex-end";
+        counterWrap.style.justifyContent = "flex-end";
+        counterWrap.style.gap = "8px";
 
-      var countLbl = document.createElement("div");
-      countLbl.textContent = "+ منتج جاهز للانطلاق";
-      countLbl.style.fontSize = "12px";
-      countLbl.style.color = "#fde68a";
+        var counterLeft = document.createElement("div");
+        counterLeft.style.textAlign = "right";
 
-      countWrap.appendChild(countSpan);
-      countWrap.appendChild(countLbl);
-      leftCol.appendChild(countWrap);
+        var counterLabel = document.createElement("div");
+        counterLabel.textContent = counterCfg.label || "";
+        counterLabel.style.fontSize = "11px";
+        counterLabel.style.letterSpacing = "0.04em";
+        counterLabel.style.color = isDarkStyle
+          ? "rgba(148,163,184,0.9)"
+          : "rgba(100,116,139,0.95)";
+        counterLabel.style.marginBottom = "2px";
 
-      if (targetCount > 0) {
+        var counterSpan = document.createElement("div");
+        counterSpan.style.fontSize = "24px";
+        counterSpan.style.fontWeight = "800";
+        counterSpan.style.fontVariantNumeric = "tabular-nums";
+        counterSpan.style.letterSpacing = "0.03em";
+        counterSpan.textContent = "0";
+        counterSpan.style.color = headingColor;
+
+        counterLeft.appendChild(counterLabel);
+        counterLeft.appendChild(counterSpan);
+        counterWrap.appendChild(counterLeft);
+        content.appendChild(counterWrap);
+
+        var targetVal = Number(counterCfg.target || 0);
         (function animateCounter(el, to, duration) {
           var start = 0;
           var startTime = Date.now();
           function tick() {
             var now = Date.now();
-            var progress = Math.min(1, (now - startTime) / (duration || 1800));
-            var val = Math.floor(start + (to - start) * progress);
-            el.textContent = val.toLocaleString("ar-SA");
+            var progress = Math.min(1, (now - startTime) / (duration || 1500));
+            var eased =
+              progress < 0.5
+                ? 2 * progress * progress
+                : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+            var val = Math.floor(start + (to - start) * eased);
+            el.textContent = val.toLocaleString("en-US");
             if (progress < 1) requestAnimationFrame(tick);
           }
           requestAnimationFrame(tick);
-        })(countSpan, targetCount, 1700);
+        })(counterSpan, targetVal, 1500);
       }
 
-      var miniNote = document.createElement("div");
-      miniNote.textContent =
-        "سجّل بياناتك عشان نرسلك رابط المتجر والعروض الخاصة بأول الافتتاح.";
-      miniNote.style.marginTop = "8px";
-      miniNote.style.fontSize = "11px";
-      miniNote.style.color = "#9ca3af";
-      leftCol.appendChild(miniNote);
+      // زر CTA
+      if (buttonBlock.enabled && buttonLabel) {
+        var btn = document.createElement("a");
+        btn.textContent = buttonLabel;
+        btn.href = buttonUrl || "#";
+        btn.style.display = "inline-flex";
+        btn.style.alignItems = "center";
+        btn.style.justifyContent = "center";
+        btn.style.fontSize = "14px";
+        btn.style.fontWeight = "700";
+        btn.style.borderRadius = "999px";
+        btn.style.padding = "11px 24px";
+        btn.style.textDecoration = "none";
+        btn.style.background = buttonColor || "#f97316";
+        btn.style.backgroundImage =
+          "linear-gradient(135deg, rgba(255,255,255,0.65), transparent)";
+        btn.style.boxShadow = isDarkStyle
+          ? "0 18px 45px rgba(15,23,42,0.85)"
+          : "0 18px 40px rgba(15,23,42,0.25)";
+        btn.style.marginTop = "4px";
+        btn.style.border = "1px solid rgba(15,23,42,0.12)";
+        btn.style.transition =
+          "transform 160ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 160ms ease-out, filter 160ms ease-out";
+        btn.style.fontVariantNumeric = "tabular-nums";
+        btn.style.color = isDarkStyle ? "#f9fafb" : "#020617";
 
-      var rightCol = document.createElement("div");
-      rightCol.style.background =
-        "radial-gradient(circle at top,#0b1120,#020617 60%)";
-      rightCol.style.borderRadius = "20px";
-      rightCol.style.padding = "14px 14px 12px";
-      rightCol.style.boxShadow =
-        "0 18px 45px rgba(15,23,42,0.8), 0 0 0 1px rgba(30,64,175,0.5)";
+        btn.onmouseenter = function () {
+          btn.style.transform = "translateY(-1.5px)";
+          btn.style.boxShadow = isDarkStyle
+            ? "0 24px 55px rgba(15,23,42,0.95)"
+            : "0 22px 50px rgba(15,23,42,0.28)";
+          btn.style.filter = "brightness(1.03)";
+        };
+        btn.onmouseleave = function () {
+          btn.style.transform = "translateY(0)";
+          btn.style.boxShadow = isDarkStyle
+            ? "0 18px 45px rgba(15,23,42,0.85)"
+            : "0 18px 40px rgba(15,23,42,0.25)";
+          btn.style.filter = "none";
+        };
 
-      var formTitle = document.createElement("div");
-      formTitle.textContent = buttonText;
-      formTitle.style.fontSize = "13px";
-      formTitle.style.fontWeight = "700";
-      formTitle.style.marginBottom = "6px";
-      formTitle.style.display = "flex";
-      formTitle.style.alignItems = "center";
-      formTitle.style.gap = "6px";
-
-      var dot = document.createElement("span");
-      dot.textContent = "●";
-      dot.style.color = "#22c55e";
-      dot.style.fontSize = "10px";
-      formTitle.appendChild(dot);
-
-      rightCol.appendChild(formTitle);
-
-      var form = document.createElement("form");
-      form.style.marginTop = "4px";
-      form.style.display = "flex";
-      form.style.flexWrap = "wrap";
-      form.style.gap = "8px";
-
-      function makeInput(labelText, placeholder, type, width) {
-        var wrap = document.createElement("div");
-        wrap.style.flex = width || "1 1 160px";
-        var label = document.createElement("label");
-        label.textContent = labelText;
-        label.style.display = "block";
-        label.style.fontSize = "11px";
-        label.style.marginBottom = "3px";
-        label.style.color = "#e5e7eb";
-        var input = document.createElement("input");
-        input.type = type || "text";
-        input.placeholder = placeholder || "";
-        input.style.width = "100%";
-        input.style.borderRadius = "999px";
-        input.style.border = "1px solid rgba(148,163,184,.7)";
-        input.style.background = "rgba(15,23,42,.9)";
-        input.style.color = "#e5e7eb";
-        input.style.fontSize = "12px";
-        input.style.padding = "8px 12px";
-        input.style.outline = "none";
-        wrap.appendChild(label);
-        wrap.appendChild(input);
-        return { wrap: wrap, input: input };
+        btn.onclick = function (e) {
+          sendEvent(widget, "click", { href: buttonUrl });
+          if (!buttonUrl || buttonUrl === "#") {
+            e.preventDefault();
+          }
+        };
+        content.appendChild(btn);
       }
 
-      var nameInput = null;
-      var phoneInput = null;
-      var emailInput = null;
+      // كوبون
+      if (couponCfg.enabled && couponCfg.code) {
+        var couponWrap = document.createElement("div");
+        couponWrap.style.marginTop = "16px";
+        couponWrap.style.display = "flex";
+        couponWrap.style.justifyContent = "space-between";
+        couponWrap.style.alignItems = "center";
+        couponWrap.style.padding = "10px 12px";
+        couponWrap.style.borderRadius = "16px";
+        couponWrap.style.background = isDarkStyle
+          ? "rgba(15,23,42,0.9)"
+          : "rgba(241,245,249,0.98)";
+        couponWrap.style.border = "1px dashed rgba(148,163,184,0.7)";
+        couponWrap.style.gap = "10px";
 
-      if (nameField.enabled) {
-        var r = makeInput("الاسم", "مثال: محمد", "text");
-        nameInput = r.input;
-        form.appendChild(r.wrap);
+        var couponLabel = document.createElement("span");
+        couponLabel.textContent = "استخدم كود الخصم:";
+        couponLabel.style.fontSize = "12px";
+        couponLabel.style.color = isDarkStyle
+          ? "rgba(148,163,184,0.96)"
+          : "rgba(100,116,139,0.98)";
+
+        var rightPart = document.createElement("div");
+        rightPart.style.display = "flex";
+        rightPart.style.alignItems = "center";
+        rightPart.style.gap = "8px";
+
+        var couponCode = document.createElement("span");
+        couponCode.textContent = couponCfg.code;
+        couponCode.style.fontFamily =
+          "SFMono-Regular, ui-monospace, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace";
+        couponCode.style.fontSize = "13px";
+        couponCode.style.fontWeight = "700";
+        couponCode.style.padding = "6px 10px";
+        couponCode.style.borderRadius = "999px";
+        couponCode.style.background = isDarkStyle ? "#f9fafb" : "#020617";
+        couponCode.style.color = isDarkStyle ? "#020617" : "#f9fafb";
+
+        var copyBtn = document.createElement("button");
+        copyBtn.type = "button";
+        copyBtn.textContent = "نسخ";
+        copyBtn.style.border = "none";
+        copyBtn.style.borderRadius = "999px";
+        copyBtn.style.padding = "6px 12px";
+        copyBtn.style.fontSize = "11px";
+        copyBtn.style.fontWeight = "600";
+        copyBtn.style.cursor = "pointer";
+        copyBtn.style.background = isDarkStyle
+          ? "rgba(15,23,42,0.9)"
+          : "rgba(15,23,42,0.95)";
+        copyBtn.style.color = "#f9fafb";
+        copyBtn.style.transition =
+          "background 140ms ease-out, transform 140ms ease-out, box-shadow 140ms ease-out";
+
+        copyBtn.onmouseenter = function () {
+          copyBtn.style.background = "#020617";
+          copyBtn.style.transform = "translateY(-0.5px)";
+          copyBtn.style.boxShadow = "0 10px 20px rgba(15,23,42,0.75)";
+        };
+        copyBtn.onmouseleave = function () {
+          copyBtn.style.background = isDarkStyle
+            ? "rgba(15,23,42,0.9)"
+            : "rgba(15,23,42,0.95)";
+          copyBtn.style.transform = "translateY(0)";
+          copyBtn.style.boxShadow = "none";
+        };
+
+        copyBtn.onclick = function () {
+          var code = couponCfg.code || "";
+          if (!code) return;
+
+          var done = false;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard
+              .writeText(code)
+              .then(function () {
+                done = true;
+              })
+              .catch(function () {});
+          }
+          if (!done) {
+            try {
+              var temp = document.createElement("textarea");
+              temp.value = code;
+              temp.style.position = "fixed";
+              temp.style.opacity = "0";
+              document.body.appendChild(temp);
+              temp.focus();
+              temp.select();
+              document.execCommand("copy");
+              document.body.removeChild(temp);
+            } catch (e) {}
+          }
+
+          copyBtn.textContent = "تم النسخ ✅";
+          setTimeout(function () {
+            copyBtn.textContent = "نسخ";
+          }, 1800);
+        };
+
+        rightPart.appendChild(couponCode);
+        rightPart.appendChild(copyBtn);
+        couponWrap.appendChild(couponLabel);
+        couponWrap.appendChild(rightPart);
+        content.appendChild(couponWrap);
       }
 
-      if (phoneField.enabled) {
-        var r2 = makeInput("رقم الجوال", "05XXXXXXXX", "tel");
-        phoneInput = r2.input;
-        form.appendChild(r2.wrap);
-      }
-
-      if (emailField.enabled) {
-        var r3 = makeInput("الإيميل (اختياري)", "example@mail.com", "email");
-        emailInput = r3.input;
-        form.appendChild(r3.wrap);
-      }
-
-      var submitBtn = document.createElement("button");
-      submitBtn.type = "submit";
-      submitBtn.textContent = submitLabel;
-      submitBtn.style.flex = "1 1 100%";
-      submitBtn.style.borderRadius = "999px";
-      submitBtn.style.border = "none";
-      submitBtn.style.background =
-        "linear-gradient(90deg,#facc15,#f97316,#facc15)";
-      submitBtn.style.color = "#1f2937";
-      submitBtn.style.fontSize = "13px";
-      submitBtn.style.fontWeight = "800";
-      submitBtn.style.padding = "9px 14px";
-      submitBtn.style.cursor = "pointer";
-      submitBtn.style.marginTop = "2px";
-      submitBtn.style.boxShadow =
-        "0 10px 30px rgba(250,204,21,0.55)";
-
-      form.appendChild(submitBtn);
-
-      var msg = document.createElement("div");
-      msg.style.marginTop = "6px";
-      msg.style.fontSize = "11px";
-      msg.style.minHeight = "16px";
-
-      form.onsubmit = function (e) {
-        e.preventDefault();
-        msg.textContent = "";
-        msg.style.color = "#f97316";
-
-        var nameVal = nameInput ? nameInput.value.trim() : "";
-        var phoneVal = phoneInput ? phoneInput.value.trim() : "";
-        var emailVal = emailInput ? emailInput.value.trim() : "";
-
-        if (nameField.enabled && nameField.required && !nameVal) {
-          msg.textContent = "فضلاً أدخل اسمك.";
-          return;
-        }
-        if (phoneField.enabled && phoneField.required && !phoneVal) {
-          msg.textContent = "فضلاً أدخل رقم الجوال.";
-          return;
-        }
-        if (emailField.enabled && emailField.required && !emailVal) {
-          msg.textContent = "فضلاً أدخل الإيميل.";
-          return;
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = "جاري الإرسال...";
-
-        var url = (PANEL_ORIGIN || "") + "/api/widgets/leads";
-
-        fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            widget_id: widget.id,
-            store_id: widget.store_id || "",
-            name: nameVal || null,
-            phone: phoneVal || null,
-            email: emailVal || null,
-            page_url: window.location.href,
-          }),
-        })
-          .then(function (res) {
-            return res.json().catch(function () {
-              return {};
-            });
-          })
-          .then(function (data) {
-            if (data && data.ok) {
-              msg.textContent = "تم استلام بياناتك بنجاح ✅";
-              msg.style.color = "#22c55e";
-              sendEvent(widget, "lead_submit");
-            } else {
-              msg.textContent = "تعذر حفظ البيانات، حاول مرة أخرى.";
-              msg.style.color = "#f87171";
-            }
-          })
-          .catch(function () {
-            msg.textContent = "تعذر حفظ البيانات، حاول مرة أخرى.";
-            msg.style.color = "#f87171";
-          })
-          .finally(function () {
-            submitBtn.disabled = false;
-            submitBtn.textContent = submitLabel;
-          });
-      };
-
-      rightCol.appendChild(form);
-      rightCol.appendChild(msg);
-
-      contentWrap.appendChild(leftCol);
-      contentWrap.appendChild(rightCol);
-
-      box.appendChild(contentWrap);
+      box.appendChild(content);
       overlay.appendChild(box);
       document.body.appendChild(overlay);
     }
+
+    // ================== GRAND LAUNCH POPUP (FORM) ==================
+    // ملاحظة: هذا الويجت مخصص لبوب أب "افتتاح المتجر" مع نموذج يجمع بيانات العملاء (اسم / جوال / إيميل)
+    // ويُستخدم عادة قبل افتتاح المتجر أو أثناء الإطلاق لجمع leads للحملة الافتتاحية.
+     // ================== GRAND LAUNCH POPUP (FORM) ==================
+// ملاحظة: هذا الويجت مخصص لبوب أب "افتتاح المتجر" مع نموذج يجمع بيانات العملاء (اسم / جوال / إيميل)
+// ويُستخدم عادة قبل افتتاح المتجر أو أثناء الإطلاق لجمع leads للحملة الافتتاحية.
+function buildGrandLaunchPopupDOM(widget) {
+  var cfg = widget.config || {};
+  var badgeText = cfg.badgeText || "افتتاح المتجر";
+  var titleText =
+    cfg.titleText || "قريبًا نفتح أبوابنا لتجربة تسوّق مختلفة";
+  var subText =
+    cfg.subText ||
+    "سجّل بياناتك وخلك من أوّل الناس اللي توصلهم عروض الافتتاح الخاصة.";
+  var buttonText = cfg.buttonText || "نبّهني عند الافتتاح";
+  var targetCount = cfg.targetCount || 0;
+  var formCfg = cfg.form || {};
+  var nameField = formCfg.name || { enabled: true, required: true };
+  var phoneField = formCfg.phone || { enabled: true, required: true };
+  var emailField = formCfg.email || { enabled: false, required: false };
+  var submitLabel = formCfg.submitLabel || "إرسال البيانات";
+
+  // ===== الخلفية (ستارة داكنة هادئة) =====
+  var overlay = document.createElement("div");
+  overlay.style.position = "fixed";
+  overlay.style.inset = "0";
+  overlay.style.zIndex = "999999";
+  overlay.style.display = "flex";
+  overlay.style.alignItems = "center";
+  overlay.style.justifyContent = "center";
+  overlay.style.background = "rgba(15,23,42,0.60)";
+  overlay.style.backdropFilter = "blur(10px)";
+  overlay.style.webkitBackdropFilter = "blur(10px)";
+
+  var glow = document.createElement("div");
+  glow.style.position = "absolute";
+  glow.style.inset = "0";
+  glow.style.pointerEvents = "none";
+  glow.style.background =
+    "radial-gradient(circle at top,rgba(59,130,246,0.18),rgba(59,130,246,0.05),transparent 60%)";
+  overlay.appendChild(glow);
+
+  // ===== الكرت الرئيسي (ستايل بطاقة iOS) =====
+  var box = document.createElement("div");
+  box.style.width = "min(94vw, 720px)";
+  box.style.background = "rgba(15,23,42,0.88)";
+  box.style.borderRadius = "24px";
+  box.style.position = "relative";
+  box.style.color = "#e5e7eb";
+  box.style.padding = "20px 20px 18px";
+  box.style.boxShadow =
+    "0 26px 80px rgba(15,23,42,0.85), 0 0 0 1px rgba(148,163,184,0.45)";
+  box.style.fontFamily =
+    "system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', sans-serif";
+  box.style.overflow = "hidden";
+
+  var innerBorder = document.createElement("div");
+  innerBorder.style.position = "absolute";
+  innerBorder.style.inset = "1px";
+  innerBorder.style.borderRadius = "22px";
+  innerBorder.style.border = "1px solid rgba(148,163,184,0.35)";
+  innerBorder.style.pointerEvents = "none";
+  box.appendChild(innerBorder);
+
+  var stripe = document.createElement("div");
+  stripe.style.position = "absolute";
+  stripe.style.top = "-40px";
+  stripe.style.left = "-10%";
+  stripe.style.width = "70%";
+  stripe.style.height = "120px";
+  stripe.style.background =
+    "linear-gradient(120deg,transparent,rgba(96,165,250,0.35),transparent)";
+  stripe.style.transform = "translateY(0)";
+  stripe.style.opacity = "0.75";
+  stripe.style.pointerEvents = "none";
+  box.appendChild(stripe);
+
+  // ===== زر الإغلاق (دائري أنيق) =====
+  var closeBtn = document.createElement("button");
+  closeBtn.innerHTML = "×";
+  closeBtn.style.position = "absolute";
+  closeBtn.style.top = "12px";
+  closeBtn.style.left = "12px";
+  closeBtn.style.width = "30px";
+  closeBtn.style.height = "30px";
+  closeBtn.style.borderRadius = "999px";
+  closeBtn.style.border = "1px solid rgba(148,163,184,.5)";
+  closeBtn.style.background = "rgba(15,23,42,0.9)";
+  closeBtn.style.color = "#e5e7eb";
+  closeBtn.style.cursor = "pointer";
+  closeBtn.style.fontSize = "18px";
+  closeBtn.style.lineHeight = "26px";
+  closeBtn.style.display = "flex";
+  closeBtn.style.alignItems = "center";
+  closeBtn.style.justifyContent = "center";
+  closeBtn.style.zIndex = "2";
+  closeBtn.style.transition = "background 0.18s ease, transform 0.18s ease";
+  closeBtn.onmouseenter = function () {
+    closeBtn.style.background = "rgba(31,41,55,1)";
+    closeBtn.style.transform = "scale(1.03)";
+  };
+  closeBtn.onmouseleave = function () {
+    closeBtn.style.background = "rgba(15,23,42,0.9)";
+    closeBtn.style.transform = "scale(1.0)";
+  };
+  closeBtn.onclick = function () {
+    if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    sendEvent(widget, "close");
+  };
+  box.appendChild(closeBtn);
+
+  // ===== محتوى الكرت (شبكة عمودين على الديسكتوب) =====
+  var contentWrap = document.createElement("div");
+  contentWrap.style.position = "relative";
+  contentWrap.style.zIndex = "1";
+  contentWrap.style.display = "grid";
+  contentWrap.style.gridTemplateColumns = "minmax(0, 1.7fr) minmax(0, 1.3fr)";
+  contentWrap.style.gap = "18px";
+  contentWrap.style.alignItems = "flex-start";
+
+  // ===== العمود الأيسر: النصوص والمعلومات =====
+  var leftCol = document.createElement("div");
+
+  var badge = document.createElement("div");
+  badge.textContent = badgeText;
+  badge.style.display = "inline-flex";
+  badge.style.alignItems = "center";
+  badge.style.gap = "6px";
+  badge.style.padding = "5px 14px";
+  badge.style.borderRadius = "999px";
+  badge.style.fontSize = "11px";
+  badge.style.fontWeight = "700";
+  badge.style.background =
+    "linear-gradient(90deg,#e5e7eb,#f9fafb)";
+  badge.style.color = "#111827";
+  badge.style.boxShadow =
+    "0 10px 28px rgba(148,163,184,0.55), 0 0 0 1px rgba(209,213,219,0.9)";
+  badge.style.letterSpacing = "0.06em";
+  badge.style.textTransform = "uppercase";
+
+  var badgeDot = document.createElement("span");
+  badgeDot.textContent = "●";
+  badgeDot.style.fontSize = "9px";
+  badgeDot.style.color = "#22c55e";
+  badge.appendChild(badgeDot);
+
+  leftCol.appendChild(badge);
+
+  var title = document.createElement("h2");
+  title.textContent = titleText;
+  title.style.marginTop = "12px";
+  title.style.fontSize = "22px";
+  title.style.fontWeight = "800";
+  title.style.letterSpacing = "0.01em";
+  title.style.color = "#f9fafb";
+  title.style.lineHeight = "1.5";
+  leftCol.appendChild(title);
+
+  var sub = document.createElement("p");
+  sub.textContent = subText;
+  sub.style.marginTop = "8px";
+  sub.style.fontSize = "13px";
+  sub.style.color = "#cbd5f5";
+  sub.style.maxWidth = "430px";
+  sub.style.lineHeight = "1.7";
+  leftCol.appendChild(sub);
+
+  // عدّاد المنتجات / رقم افتراضي ليوحي بالجاهزية
+  var countWrap = document.createElement("div");
+  countWrap.style.marginTop = "16px";
+  countWrap.style.display = "flex";
+  countWrap.style.alignItems = "baseline";
+  countWrap.style.gap = "8px";
+
+  var countSpan = document.createElement("div");
+  countSpan.style.fontSize = "26px";
+  countSpan.style.fontWeight = "800";
+  countSpan.style.fontVariantNumeric = "tabular-nums";
+  countSpan.style.color = "#e5e7eb";
+  countSpan.textContent = "0";
+
+  var countLbl = document.createElement("div");
+  countLbl.textContent = "+ منتج يتم تجهيزها للإطلاق";
+  countLbl.style.fontSize = "12px";
+  countLbl.style.color = "#9ca3af";
+
+  countWrap.appendChild(countSpan);
+  countWrap.appendChild(countLbl);
+  leftCol.appendChild(countWrap);
+
+  if (targetCount > 0) {
+    (function animateCounter(el, to, duration) {
+      var start = 0;
+      var startTime = Date.now();
+      function tick() {
+        var now = Date.now();
+        var progress = Math.min(1, (now - startTime) / (duration || 1600));
+        var val = Math.floor(start + (to - start) * progress);
+        el.textContent = val.toLocaleString("ar-SA");
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })(countSpan, targetCount, 1600);
+  }
+
+  var miniNote = document.createElement("div");
+  miniNote.textContent =
+    "بنرسل لك رابط المتجر أول ما يفتح، مع عروض خاصة لعملاء الافتتاح فقط.";
+  miniNote.style.marginTop = "10px";
+  miniNote.style.fontSize = "11px";
+  miniNote.style.color = "#9ca3af";
+  leftCol.appendChild(miniNote);
+
+  // ===== العمود الأيمن: الفورم (ستايل iOS card) =====
+  var rightCol = document.createElement("div");
+  rightCol.style.background = "rgba(15,23,42,0.96)";
+  rightCol.style.borderRadius = "20px";
+  rightCol.style.padding = "14px 14px 12px";
+  rightCol.style.boxShadow =
+    "0 18px 45px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
+  rightCol.style.backdropFilter = "blur(14px)";
+  rightCol.style.webkitBackdropFilter = "blur(14px)";
+
+  var formTitle = document.createElement("div");
+  formTitle.textContent = buttonText;
+  formTitle.style.fontSize = "13px";
+  formTitle.style.fontWeight = "700";
+  formTitle.style.marginBottom = "6px";
+  formTitle.style.display = "flex";
+  formTitle.style.alignItems = "center";
+  formTitle.style.gap = "6px";
+
+  var dot = document.createElement("span");
+  dot.textContent = "●";
+  dot.style.color = "#22c55e";
+  dot.style.fontSize = "10px";
+  formTitle.appendChild(dot);
+
+  rightCol.appendChild(formTitle);
+
+  var form = document.createElement("form");
+  form.style.marginTop = "4px";
+  form.style.display = "flex";
+  form.style.flexWrap = "wrap";
+  form.style.gap = "8px";
+
+  function makeInput(labelText, placeholder, type, width) {
+    var wrap = document.createElement("div");
+    wrap.style.flex = width || "1 1 160px";
+
+    var label = document.createElement("label");
+    label.textContent = labelText;
+    label.style.display = "block";
+    label.style.fontSize = "11px";
+    label.style.marginBottom = "3px";
+    label.style.color = "#e5e7eb";
+
+    var input = document.createElement("input");
+    input.type = type || "text";
+    input.placeholder = placeholder || "";
+    input.style.width = "100%";
+    input.style.borderRadius = "999px";
+    input.style.border = "1px solid rgba(148,163,184,.8)";
+    input.style.background = "rgba(15,23,42,0.95)";
+    input.style.color = "#f9fafb";
+    input.style.fontSize = "12px";
+    input.style.padding = "8px 12px";
+    input.style.outline = "none";
+    input.style.transition =
+      "border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease";
+
+    input.onfocus = function () {
+      input.style.borderColor = "#60a5fa";
+      input.style.boxShadow = "0 0 0 1px rgba(96,165,250,0.9)";
+      input.style.background = "rgba(15,23,42,1)";
+    };
+    input.onblur = function () {
+      input.style.borderColor = "rgba(148,163,184,.8)";
+      input.style.boxShadow = "none";
+      input.style.background = "rgba(15,23,42,0.95)";
+    };
+
+    wrap.appendChild(label);
+    wrap.appendChild(input);
+    return { wrap: wrap, input: input };
+  }
+
+  var nameInput = null;
+  var phoneInput = null;
+  var emailInput = null;
+
+  if (nameField.enabled) {
+    var r = makeInput("الاسم الكامل", "مثال: محمد أحمد", "text");
+    nameInput = r.input;
+    form.appendChild(r.wrap);
+  }
+
+  if (phoneField.enabled) {
+    var r2 = makeInput("رقم الواتساب", "05XXXXXXXX", "tel");
+    phoneInput = r2.input;
+    form.appendChild(r2.wrap);
+  }
+
+  if (emailField.enabled) {
+    var r3 = makeInput("الإيميل (اختياري)", "example@mail.com", "email");
+    emailInput = r3.input;
+    form.appendChild(r3.wrap);
+  }
+
+  var submitBtn = document.createElement("button");
+  submitBtn.type = "submit";
+  submitBtn.textContent = submitLabel;
+  submitBtn.style.flex = "1 1 100%";
+  submitBtn.style.borderRadius = "999px";
+  submitBtn.style.border = "none";
+  submitBtn.style.background =
+    "linear-gradient(90deg,#4f46e5,#6366f1,#22c55e)";
+  submitBtn.style.color = "#f9fafb";
+  submitBtn.style.fontSize = "13px";
+  submitBtn.style.fontWeight = "700";
+  submitBtn.style.padding = "9px 14px";
+  submitBtn.style.cursor = "pointer";
+  submitBtn.style.marginTop = "4px";
+  submitBtn.style.boxShadow =
+    "0 14px 30px rgba(99,102,241,0.65)";
+  submitBtn.style.display = "inline-flex";
+  submitBtn.style.alignItems = "center";
+  submitBtn.style.justifyContent = "center";
+  submitBtn.style.gap = "6px";
+  submitBtn.style.transition =
+    "transform 0.16s ease, box-shadow 0.16s ease, filter 0.16s ease";
+
+  var arrowSpan = document.createElement("span");
+  arrowSpan.textContent = "↗";
+  arrowSpan.style.fontSize = "13px";
+  submitBtn.appendChild(arrowSpan);
+
+  submitBtn.onmouseenter = function () {
+    submitBtn.style.transform = "translateY(-1px)";
+    submitBtn.style.boxShadow =
+      "0 18px 36px rgba(79,70,229,0.75)";
+    submitBtn.style.filter = "brightness(1.03)";
+  };
+  submitBtn.onmouseleave = function () {
+    submitBtn.style.transform = "translateY(0)";
+    submitBtn.style.boxShadow =
+      "0 14px 30px rgba(99,102,241,0.65)";
+    submitBtn.style.filter = "brightness(1)";
+  };
+
+  form.appendChild(submitBtn);
+
+  var msg = document.createElement("div");
+  msg.style.marginTop = "6px";
+  msg.style.fontSize = "11px";
+  msg.style.minHeight = "16px";
+
+  form.onsubmit = function (e) {
+    e.preventDefault();
+    msg.textContent = "";
+    msg.style.color = "#f97316";
+
+    var nameVal = nameInput ? nameInput.value.trim() : "";
+    var phoneVal = phoneInput ? phoneInput.value.trim() : "";
+    var emailVal = emailInput ? emailInput.value.trim() : "";
+
+    if (nameField.enabled && nameField.required && !nameVal) {
+      msg.textContent = "فضلاً أدخل اسمك الكامل.";
+      return;
+    }
+    if (phoneField.enabled && phoneField.required && !phoneVal) {
+      msg.textContent = "فضلاً أدخل رقم الجوال بشكل صحيح.";
+      return;
+    }
+    if (emailField.enabled && emailField.required && !emailVal) {
+      msg.textContent = "فضلاً أدخل بريدك الإلكتروني.";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "جاري حفظ بياناتك…";
+
+    var url = (PANEL_ORIGIN || "") + "/api/widgets/leads";
+
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        widget_id: widget.id,
+        store_id: widget.store_id || "",
+        name: nameVal || null,
+        phone: phoneVal || null,
+        email: emailVal || null,
+        page_url: window.location.href,
+      }),
+    })
+      .then(function (res) {
+        return res.json().catch(function () {
+          return {};
+        });
+      })
+      .then(function (data) {
+        if (data && data.ok) {
+          msg.textContent = "تم استلام بياناتك بنجاح ✅";
+          msg.style.color = "#22c55e";
+          sendEvent(widget, "lead_submit");
+        } else {
+          msg.textContent = "تعذر حفظ البيانات، حاول مرة أخرى.";
+          msg.style.color = "#f87171";
+        }
+      })
+      .catch(function () {
+        msg.textContent = "تعذر حفظ البيانات، حاول مرة أخرى.";
+        msg.style.color = "#f87171";
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitLabel;
+        submitBtn.appendChild(arrowSpan);
+      });
+  };
+
+  rightCol.appendChild(form);
+  rightCol.appendChild(msg);
+
+  contentWrap.appendChild(leftCol);
+  contentWrap.appendChild(rightCol);
+
+  box.appendChild(contentWrap);
+  overlay.appendChild(box);
+  document.body.appendChild(overlay);
+
+  // ===== ميديا كويري بسيطة للجوال (عمود واحد) =====
+  try {
+    if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
+      contentWrap.style.gridTemplateColumns = "minmax(0,1fr)";
+      box.style.width = "92vw";
+      box.style.padding = "18px 16px 16px";
+    }
+  } catch (_) {}
+}
+
+
+
+
+
+
+
+
+
 
     // ========== تحميل مكتبة Choices (CSS + JS) ==========
     function ensureChoicesAssets() {
@@ -1092,7 +1178,7 @@ function buildSalePopupDOM(widget) {
         var parts = wrap.querySelector("#parts");
 
         var projectId = fsCfg.projectId || "spare-parts-project-55319";
-        var apiKey = fsCfg.apiKey || "AIzaSyB0qGrqutUtkFHKnyy7F73kykiDfcQhsDc";
+        var apiKey = fsCfg.apiKey || "AIzaSyB0qGrqutUtkFHKnyy7F73kyDfcQhsDc";
         var metaDoc = fsCfg.metaDoc || "SECTION_OPTIONS";
 
         function decodeValue(v) {

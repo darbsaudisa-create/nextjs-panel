@@ -69,7 +69,6 @@ export default async function StoresPage() {
                 </td>
                 <td className="px-4 py-3">
                   <div className="flex flex-wrap gap-2">
-                    {/* هذا هو زر الدخول على صفحة Popups */}
                     <Link
                       href={`/stores/${s.id}/popups`}
                       className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
@@ -81,6 +80,12 @@ export default async function StoresPage() {
                       className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
                     >
                       فلاتر البحث
+                    </Link>
+                    <Link
+                      href={`/stores/${s.id}/widgets`}
+                      className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 hover:bg-slate-100"
+                    >
+                      جميع Widgets
                     </Link>
                   </div>
                 </td>
