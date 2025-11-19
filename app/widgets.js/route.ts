@@ -1074,11 +1074,18 @@ function buildAdvancedSearchButton(widget) {
     firestore.apiKey || "AIzaSyB0qGrqutUtkFHKnyy7F73kyiDfcQhsDc";
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
-  var maxParts = Number(searchCfg.maxParts || 5);
-var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
-  /\/+$/,
-  ""
-);
+var maxParts = Number(searchCfg.maxParts || 5);
+
+// ==== ضبط الدومين بشكل آمن (بدون undefined) ====
+var rawDomain = searchCfg.targetDomain;
+if (!rawDomain || typeof rawDomain !== "string") {
+  rawDomain = "https://darb.com.sa";
+}
+// لو طلعت القيمة بالشكل "undefinedhttps://darb.com.sa" نشيل undefined من البداية
+rawDomain = rawDomain.replace(/^undefined/gi, "").trim();
+// إزالة / الزائدة في النهاية
+var targetDomain = rawDomain.replace(/\/+$/, "");
+
 
 
 
