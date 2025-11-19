@@ -691,16 +691,111 @@ function buildGrandLaunchPopupDOM(widget) {
   };
   box.appendChild(closeBtn);
 
-  // ===== المحتوى: عمودين (ديسكتوب) =====
+  // ===== المحتوى: موبايل أولاً (نص فوق + فورم تحت) =====
   var contentWrap = document.createElement("div");
   contentWrap.style.position = "relative";
   contentWrap.style.zIndex = "1";
-  contentWrap.style.display = "grid";
-  contentWrap.style.gridTemplateColumns = "minmax(0,1.1fr) minmax(0,1.7fr)";
-  contentWrap.style.gap = "16px";
-  contentWrap.style.alignItems = "stretch";
+  contentWrap.style.display = "flex";
+  contentWrap.style.flexDirection = "column";
+  contentWrap.style.gap = "14px";
 
-  // ============ العمود الأيسر – كرت الفورم ============
+  // ============ العمود الأيمن – النصوص (سيكون فوق في الموبايل) ============
+  var rightCol = document.createElement("div");
+  rightCol.style.display = "flex";
+  rightCol.style.flexDirection = "column";
+  rightCol.style.justifyContent = "center";
+  rightCol.style.gap = "8px";
+
+  var badge = document.createElement("div");
+  badge.style.display = "inline-flex";
+  badge.style.alignItems = "center";
+  badge.style.gap = "6px";
+  badge.style.padding = "5px 14px";
+  badge.style.borderRadius = "999px";
+  badge.style.fontSize = "11px";
+  badge.style.fontWeight = "600";
+  badge.style.background = "rgba(15,23,42,0.98)";
+  badge.style.color = "#e5e7eb";
+  badge.style.boxShadow =
+    "0 10px 26px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
+
+  var badgeDot = document.createElement("span");
+  badgeDot.textContent = "●";
+  badgeDot.style.fontSize = "9px";
+  badgeDot.style.color = "#22c55e";
+
+  var badgeTextNode = document.createElement("span");
+  badgeTextNode.textContent = badgeText;
+
+  badge.appendChild(badgeDot);
+  badge.appendChild(badgeTextNode);
+  rightCol.appendChild(badge);
+
+  var title = document.createElement("h2");
+  title.textContent = titleText;
+  title.style.marginTop = "10px";
+  title.style.fontSize = "22px";
+  title.style.fontWeight = "800";
+  title.style.letterSpacing = "0.01em";
+  title.style.color = "#f9fafb";
+  title.style.lineHeight = "1.6";
+  rightCol.appendChild(title);
+
+  var sub = document.createElement("p");
+  sub.textContent = subText;
+  sub.style.marginTop = "6px";
+  sub.style.fontSize = "13px";
+  sub.style.color = "#cbd5f5";
+  sub.style.maxWidth = "420px";
+  sub.style.lineHeight = "1.8";
+  rightCol.appendChild(sub);
+
+  var countWrap = document.createElement("div");
+  countWrap.style.marginTop = "14px";
+  countWrap.style.display = "flex";
+  countWrap.style.alignItems = "baseline";
+  countWrap.style.gap = "8px";
+
+  var countSpan = document.createElement("div");
+  countSpan.style.fontSize = "24px";
+  countSpan.style.fontWeight = "800";
+  countSpan.style.fontVariantNumeric = "tabular-nums";
+  countSpan.style.color = "#e5e7eb";
+  countSpan.textContent = "0";
+
+  var countLbl = document.createElement("div");
+  countLbl.textContent = "+ منتج يتم تجهيزها للإطلاق";
+  countLbl.style.fontSize = "12px";
+  countLbl.style.color = "#9ca3af";
+
+  countWrap.appendChild(countSpan);
+  countWrap.appendChild(countLbl);
+  rightCol.appendChild(countWrap);
+
+  if (targetCount > 0) {
+    (function animateCounter(el, to, duration) {
+      var start = 0;
+      var startTime = Date.now();
+      function tick() {
+        var now = Date.now();
+        var progress = Math.min(1, (now - startTime) / (duration || 1600));
+        var val = Math.floor(start + (to - start) * progress);
+        el.textContent = val.toLocaleString("ar-SA");
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })(countSpan, targetCount, 1600);
+  }
+
+  var miniNote = document.createElement("div");
+  miniNote.textContent =
+    "بنرسل لك رابط المتجر أول ما يفتح، مع عروض خاصة لعملاء الافتتاح فقط.";
+  miniNote.style.marginTop = "10px";
+  miniNote.style.fontSize = "11px";
+  miniNote.style.color = "#9ca3af";
+  rightCol.appendChild(miniNote);
+
+  // ============ العمود الأيسر – كرت الفورم (سيكون تحت في الموبايل) ============
   var leftCol = document.createElement("div");
   leftCol.style.display = "flex";
   leftCol.style.alignItems = "stretch";
@@ -871,123 +966,28 @@ function buildGrandLaunchPopupDOM(widget) {
   formCard.appendChild(msg);
   leftCol.appendChild(formCard);
 
-  // ============ العمود الأيمن – النصوص ============
-  var rightCol = document.createElement("div");
-  rightCol.style.display = "flex";
-  rightCol.style.flexDirection = "column";
-  rightCol.style.justifyContent = "center";
-  rightCol.style.gap = "8px";
+  // ===== ترتيب موبايل: نص فوق، فورم تحت =====
+  contentWrap.appendChild(rightCol);
+  contentWrap.appendChild(leftCol);
 
-  var badge = document.createElement("div");
-  badge.style.display = "inline-flex";
-  badge.style.alignItems = "center";
-  badge.style.gap = "6px";
-  badge.style.padding = "5px 14px";
-  badge.style.borderRadius = "999px";
-  badge.style.fontSize = "11px";
-  badge.style.fontWeight = "600";
-  badge.style.background = "rgba(15,23,42,0.98)";
-  badge.style.color = "#e5e7eb";
-  badge.style.boxShadow =
-    "0 10px 26px rgba(15,23,42,0.9), 0 0 0 1px rgba(55,65,81,0.9)";
-
-  var badgeDot = document.createElement("span");
-  badgeDot.textContent = "●";
-  badgeDot.style.fontSize = "9px";
-  badgeDot.style.color = "#22c55e";
-
-  var badgeTextNode = document.createElement("span");
-  badgeTextNode.textContent = badgeText;
-
-  badge.appendChild(badgeDot);
-  badge.appendChild(badgeTextNode);
-  rightCol.appendChild(badge);
-
-  var title = document.createElement("h2");
-  title.textContent = titleText;
-  title.style.marginTop = "10px";
-  title.style.fontSize = "22px";
-  title.style.fontWeight = "800";
-  title.style.letterSpacing = "0.01em";
-  title.style.color = "#f9fafb";
-  title.style.lineHeight = "1.6";
-  rightCol.appendChild(title);
-
-  var sub = document.createElement("p");
-  sub.textContent = subText;
-  sub.style.marginTop = "6px";
-  sub.style.fontSize = "13px";
-  sub.style.color = "#cbd5f5";
-  sub.style.maxWidth = "420px";
-  sub.style.lineHeight = "1.8";
-  rightCol.appendChild(sub);
-
-  var countWrap = document.createElement("div");
-  countWrap.style.marginTop = "14px";
-  countWrap.style.display = "flex";
-  countWrap.style.alignItems = "baseline";
-  countWrap.style.gap = "8px";
-
-  var countSpan = document.createElement("div");
-  countSpan.style.fontSize = "24px";
-  countSpan.style.fontWeight = "800";
-  countSpan.style.fontVariantNumeric = "tabular-nums";
-  countSpan.style.color = "#e5e7eb";
-  countSpan.textContent = "0";
-
-  var countLbl = document.createElement("div");
-  countLbl.textContent = "+ منتج يتم تجهيزها للإطلاق";
-  countLbl.style.fontSize = "12px";
-  countLbl.style.color = "#9ca3af";
-
-  countWrap.appendChild(countSpan);
-  countWrap.appendChild(countLbl);
-  rightCol.appendChild(countWrap);
-
-  if (targetCount > 0) {
-    (function animateCounter(el, to, duration) {
-      var start = 0;
-      var startTime = Date.now();
-      function tick() {
-        var now = Date.now();
-        var progress = Math.min(1, (now - startTime) / (duration || 1600));
-        var val = Math.floor(start + (to - start) * progress);
-        el.textContent = val.toLocaleString("ar-SA");
-        if (progress < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
-    })(countSpan, targetCount, 1600);
-  }
-
-  var miniNote = document.createElement("div");
-  miniNote.textContent =
-    "بنرسل لك رابط المتجر أول ما يفتح، مع عروض خاصة لعملاء الافتتاح فقط.";
-  miniNote.style.marginTop = "10px";
-  miniNote.style.fontSize = "11px";
-  miniNote.style.color = "#9ca3af";
-  rightCol.appendChild(miniNote);
-
-  // ===== ربط الأعمدة =====
-  contentWrap.appendChild(rightCol); // لاحظ: النص أول في الـ DOM
-  contentWrap.appendChild(leftCol);  // والفورم ثاني
   box.appendChild(contentWrap);
   overlay.appendChild(box);
   document.body.appendChild(overlay);
 
-  // ===== موبايل: نص فوق + فورم تحت =====
+  // ===== ديسكتوب: نحوله عمودين، فورم يسار – نص يمين =====
   try {
-    if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
-      // نخليها فلكس عمودي ونضمن الترتيب: النص ثم الفورم
-      contentWrap.style.display = "flex";
-      contentWrap.style.flexDirection = "column";
-      contentWrap.style.gap = "14px";
-      box.style.width = "92vw";
-      box.style.padding = "16px 14px 14px";
+    if (
+      window.matchMedia &&
+      window.matchMedia("(min-width: 768px)").matches
+    ) {
+      contentWrap.style.display = "grid";
+      contentWrap.style.gridTemplateColumns =
+        "minmax(0,1.1fr) minmax(0,1.7fr)";
+      contentWrap.style.gap = "16px";
 
-      // نتأكد إن rightCol فوق و leftCol تحت
-      contentWrap.innerHTML = "";
-      contentWrap.appendChild(rightCol); // نصوص
-      contentWrap.appendChild(leftCol);  // فورم
+      // نخلي الفورم في العمود الأول، النص في الثاني
+      leftCol.style.order = "1";
+      rightCol.style.order = "2";
     }
   } catch (_) {}
 
@@ -1041,7 +1041,7 @@ function buildGrandLaunchPopupDOM(widget) {
         if (data && data.ok) {
           msg.textContent = "تم استلام بياناتك بنجاح ✅";
           msg.style.color = "#22c55e";
-          sendEvent(widget, "lead_submit");
+          sendEvent(widget, "lead_submit";
         } else {
           msg.textContent = "تعذر حفظ البيانات، حاول مرة أخرى.";
           msg.style.color = "#f87171";
@@ -1062,6 +1062,7 @@ function buildGrandLaunchPopupDOM(widget) {
 
 
 
+
 // ================== ADVANCED CAR PICKER (BUTTON + FULLSCREEN POPUP) ==================
 function buildAdvancedSearchButton(widget) {
   var cfg = widget.config || {};
@@ -1075,16 +1076,11 @@ function buildAdvancedSearchButton(widget) {
   var metaDoc = firestore.metaDoc || "SECTION_OPTIONS";
 
 var maxParts = Number(searchCfg.maxParts || 5);
+var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
+  /\/+$/,
+  ""
+);
 
-// ==== ضبط الدومين بشكل آمن (بدون undefined) ====
-var rawDomain = searchCfg.targetDomain;
-if (!rawDomain || typeof rawDomain !== "string") {
-  rawDomain = "https://darb.com.sa";
-}
-// لو طلعت القيمة بالشكل "undefinedhttps://darb.com.sa" نشيل undefined من البداية
-rawDomain = rawDomain.replace(/^undefined/gi, "").trim();
-// إزالة / الزائدة في النهاية
-var targetDomain = rawDomain.replace(/\/+$/, "");
 
 
 
