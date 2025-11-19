@@ -1451,35 +1451,30 @@ var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
         var modelId = yearNode.id;
         var sectionId = sectionObj.id;
 
-       var url =
-  baseDomain +
-  "/category/" +
-  encodeURIComponent(carSlug) +
-  "?filters[company]=" +
-  encodeURIComponent(companyId) +
-  "&filters[category]=" +
-  encodeURIComponent(categoryId) +
-  "&filters[category_id]=" +
-  encodeURIComponent(modelId) +
-  "&filters[brand_id]=" +
-  encodeURIComponent(sectionId);
+                var url =
+          targetDomain +
+          "/category/" +
+          encodeURIComponent(carSlug) +
+          "?filters[company]=" +
+          encodeURIComponent(companyId) +
+          "&filters[category]=" +
+          encodeURIComponent(categoryId) +
+          "&filters[category_id]=" +
+          encodeURIComponent(modelId) +
+          "&filters[brand_id]=" +
+          encodeURIComponent(sectionId);
 
-var selectedPartsArr = [];
-if (parts && parts.choices) {
-  selectedPartsArr = parts.choices.getValue(true);
-}
-if (selectedPartsArr.length > 0) {
-  url +=
-    "&keyword=" +
-    encodeURIComponent(selectedPartsArr.join("||"));
-}
+        if (state.options && state.options.length) {
+          url +=
+            "&keyword=" + encodeURIComponent(state.options.join("||"));
+        }
 
-// تنظيف أي "undefined" في بداية الرابط قبل التحويل
-if (url.indexOf("undefinedhttps://") === 0) {
-  url = url.replace("undefined", "");
-}
+        // لو صار url بالشكل "undefinedhttps://darb.com.sa/..." نشيل undefined من البداية
+        if (url.indexOf("undefinedhttps://") === 0) {
+          url = url.replace("undefined", "");
+        }
 
-window.location.href = url;
+        window.location.href = url;
 
       };
     }
