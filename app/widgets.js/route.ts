@@ -1645,7 +1645,7 @@ var targetDomain = (searchCfg.targetDomain || "https://darb.com.sa").replace(
             ' +
           heroSubtitle.replace(/</g, "&lt;") +
           ' <br>\\
-            <span style="color:#2563eb;font-weight:600;">شحن سريع خلال 3-4 أيام</span> وسعر منافس جداً <span class="emoji-bounce">🚚</span><span class="emoji-bounce">🔥</span>\\
+            <span style="color:#2563eb;font-weight:600;">شحن سريع خلال 4-6 أيام</span> وسعر منافس جداً <span class="emoji-bounce">🚚</span><span class="emoji-bounce">🔥</span>\\
           </div>\\
         </div>\\
         <div class="X1">\\
